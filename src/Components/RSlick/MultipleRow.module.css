@@ -1,0 +1,15 @@
+.slick-next::before,
+.slick-prev::before {
+    color: blue !important;
+    font-size: 2rem !important;
+}
+
+.width-item {
+    width: 100% !important;
+    /* height: 50% !important; */
+}
+
+
+.active_Film_button{
+    @apply bg-slate-700 border-red-500
+}
