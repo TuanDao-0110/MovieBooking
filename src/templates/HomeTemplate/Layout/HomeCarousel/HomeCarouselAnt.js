@@ -5,8 +5,9 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux';
 import { getCarouselAction } from '../../../../redux/action/CarouselAction';
 import './HomeCarousel.css'
+import { width } from 'tailwindcss/defaultTheme';
 const contentStyle = {
-    height: '400px',
+    // height: '100%',
     color: '#fff',
     lineHeight: '360px',
     textAlign: 'center',
@@ -26,8 +27,8 @@ export default function HomeCarouselAnt() {
     const renderListMovie = () => {
         return listMovie?.map((item, index) => {
             return <div className='' key={index} >
-                <div className='opacity-75' style={{ ...contentStyle, backgroundImage: `url(${item.hinhAnh})`, backgroundSize: '', backgroundRepeat: 'no-repeat', backgroundPosition: 'cover' }} >
-                    {/* <img src={item.hinhAnh} className='opacity-0 w-full' alt='' /> */}
+                <div className='opacity-75 ' style={{ ...contentStyle, backgroundImage: ` `, }} >
+                    <img src={item.hinhAnh} className='w-full ' style={{ width: "window.innerWidth", }} alt='' />
                 </div>
             </div>
         })
