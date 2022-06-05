@@ -1,4 +1,4 @@
-import { ACTIVE_CHANGE, BOOKING_SEAT_REDUCER, BOOKING_SEAT_REMOVE_REDUCER, CONFIRM_BOOKING_REDUCER, ORDER_BOOKING_FROM_SERVER, SWITCH_TAB, TICKET_INFOR_REDUCER, } from "../type/MovieManagerType"
+import { ACTIVE_CHANGE, BOOKING_SEAT_REDUCER, BOOKING_SEAT_REMOVE_REDUCER, CONFIRM_BOOKING_REDUCER, ORDER_BOOKING_FROM_SERVER, REMOVE_ALL_TEMP_BOOKING, SWITCH_TAB, TICKET_INFOR_REDUCER, } from "../type/MovieManagerType"
 import { modelDetailsTicketBooking } from "../../__core/Models/DetailsTicketBooking"
 import _ from 'lodash'
 const newModel = new modelDetailsTicketBooking()
@@ -33,6 +33,8 @@ export const TicketBookingReducer = (state = initialState, action) => {
             return { ...state, tabActive: '2' }
         case ACTIVE_CHANGE:
             return { ...state, tabActive: action.number }
+        case REMOVE_ALL_TEMP_BOOKING:
+            return { ...state, presentBookingSeatArr: [] }
         default:
             return state
     }

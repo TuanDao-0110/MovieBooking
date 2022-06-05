@@ -39,7 +39,7 @@ export default function HomeMenu(props) {
                                         <div className='grid grid-cols-4 gap-1'>
 
                                             {Film.lstLichChieuTheoPhim?.slice(0, 10).map((time, index) => {
-                                                return <NavLink key={index} to='/' className='text-center text-green-700 hover:text-purple-600 text-sm' >
+                                                return <NavLink key={index} to={`/checkout/${time.maLichChieu}`} className='text-center text-green-700 hover:text-purple-600 text-sm' >
                                                     {moment(time.ngayChieuGioChieu).format('hh:mm A')}
                                                 </NavLink>
                                             })}

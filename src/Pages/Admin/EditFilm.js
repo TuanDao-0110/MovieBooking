@@ -8,7 +8,7 @@ import { Button, Form, } from 'antd';
 import { useSelector } from 'react-redux';
 import _ from 'lodash'
 
-
+// window.location.reload()
 
 export default function EditFilm(props) {
     const [img, setImg] = useState();
@@ -123,12 +123,15 @@ export default function EditFilm(props) {
                 </form>
                 <form label="Date" name='date'>
                     <label>Date </label>
+                    <br></br>
                     <input type='date' className='' value={moment(formik.values.date).format("YYYY-MM-DD")} name='date' onChange={handleDatePicker} />
 
                 </form>
 
                 <form label="onState" valuePropName="onState" name='onState' id='onState'>
                     <label>On state</label>
+                    <br></br>
+
                     <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
                         <input type="checkbox" name='onState' id="default-toggle" class="sr-only peer" checked={formik.values.onState} onChange={(e) => {
                             formik.setFieldValue('onState', e.target.checked)
@@ -140,6 +143,8 @@ export default function EditFilm(props) {
 
                 <form label="Hot" valuePropName="hot" name='hot' id='hot'>
                     <label>Hot</label>
+                    <br></br>
+
                     <label for="checked-toggle-hot" class="inline-flex relative items-center cursor-pointer">
                         <input type="checkbox" value="" id="checked-toggle-hot" class="sr-only peer" checked={formik.values.hot} onChange={(e) => {
                             formik.setFieldValue('hot', e.target.checked)
@@ -151,6 +156,8 @@ export default function EditFilm(props) {
 
                 <form label="coming" valuePropName="coming" name='coming' id='coming'>
                     <label>Coming</label>
+                    <br></br>
+
                     <label for="checked-toggle-coming" class="inline-flex relative items-center cursor-pointer">
                         <input type="checkbox" value="" id="checked-toggle-coming" class="sr-only peer" checked={formik.values.coming} onChange={(e) => {
                             formik.setFieldValue('coming', e.target.checked)
@@ -159,17 +166,22 @@ export default function EditFilm(props) {
                     </label>
                 </form>
 
-                <form label="Rating" name='rating'>
-                    <label>Rating</label>
-                    <input max={10} min={0} type='number' name='rating' defaultValue={formik.values.rating} onChange={handleChangSwitch('rating')} />
-                </form>
-                <Form.Item label="Picture Upload" name=''>
-                    <input type='file' onChange={handleChangeFile} accept="image/png, image/jpeg" />
-                    <br>
-                    </br>
+                <form label="Rating" name='rating' className='flex items-center'>
+                    <label className='mr-5'>Rating</label>
 
-                    <img src={_.isEmpty(img) ? filmDetailsForAdmin.hinhAnh : img} alt='' className='w-16 h-16' />
-                </Form.Item>
+                    <input max={10} min={0} type='number' name='rating' value={formik.values.rating} onChange={handleChangSwitch('rating')} />
+                </form>
+                <div className='flex items-start w-full'>
+
+                    <Form.Item label="" name=''>
+                        <label className='mr-5'>File Up Load</label>
+                        <input type='file' onChange={handleChangeFile} accept="image/png, image/jpeg" />
+                        <br>
+                        </br>
+
+                        <img src={_.isEmpty(img) ? filmDetailsForAdmin.hinhAnh : img} alt='' className='w-16 h-16' />
+                    </Form.Item>
+                </div>
                 <Form.Item label="Action: ">
                     <Button type="primary" htmlType="submit">Edit Film</Button>
                 </Form.Item>

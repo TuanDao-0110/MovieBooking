@@ -48,7 +48,10 @@ export default function ShowTime(props) {
   return (
     <div  >
       <h2>Change Film : ------- {tenPhim}</h2>
-      <img className='w-20 h-24 ' src={hinhAnh} alt=''></img>
+      <img className='w-20 h-24 ' src={hinhAnh} alt='' onError={({ currentTarget }) => {
+        currentTarget.onerror = null; // prevents looping
+        currentTarget.src = "https://api.lorem.space/image/movie?w=150&h=220";
+      }}></img>
       <Form.Item>
 
 

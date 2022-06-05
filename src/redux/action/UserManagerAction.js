@@ -1,6 +1,6 @@
 import { managerUserService } from "../../Services/ManagerUserService"
 import { ACCOUNT, NAME_USER, TOKEN } from "../../utilities/Setting/config"
-import { SUCCESS, USER_LOG_IN } from "../type/utility"
+import { FORBIDDEN, SUCCESS, USER_LOG_IN } from "../type/utility"
 import { history } from "../../App"
 import { CLOSE_LOADING, OPEN_LOADING, USER_BOOKING_INFOR_REDUCER, USER_REDUCER } from "../type/MovieManagerType"
 
@@ -20,8 +20,8 @@ export const UserManagerAction = (dataUser) => {
                 history.push('/')
             }
         } catch (error) {
+            alert(error.response.statusText)
             console.log(error.response)
-            alert('login fail', error.response.data.message)
         }
     }
 }
@@ -37,7 +37,7 @@ export const logUpUserAction = (dataUser) => {
                 }
             }
         } catch (error) {
-            alert(error.response.data.content)
+            alert(error.response.statusText)
             console.log(error.response)
         }
     }
@@ -46,15 +46,27 @@ export const logUpUserAction = (dataUser) => {
 
 
 export const userManagerBookingInfo = () => {
+
     return async dispatch => {
+        dispatch({
+            type: OPEN_LOADING
+        })
         try {
             const result = await managerUserService.postUserBookingInfor()
             dispatch({
                 type: USER_BOOKING_INFOR_REDUCER,
-                bookingInforUser: result.data.content.thongTinDatVe
+                bookingInforUser: result.data.content.thongTinDatVe,
+                userProfile: result.data.content
+            })
+            dispatch({
+                type: CLOSE_LOADING
             })
         } catch (error) {
-
+            alert(error.response.statusText)
+            console.log(error.response)
+            dispatch({
+                type: CLOSE_LOADING
+            })
         }
     }
 }
@@ -67,7 +79,7 @@ export async function takeUserListAction() {
 
         return result
     } catch (error) {
-        alert(error.response.data.content)
+        alert(error.response.statusText)
         console.log(error.response)
     }
 }
@@ -79,7 +91,7 @@ export async function searchUserAction(searchKey) {
         console.log(result)
         return result.data.content
     } catch (error) {
-        alert(error.response.data.content)
+        alert(error.response.statusText)
         console.log(error.response)
     }
 }
@@ -103,7 +115,7 @@ export async function addNewUserAction(userModel, dispatch) {
             type: CLOSE_LOADING
         })
     } catch (error) {
-        alert(error.response.data.content)
+        alert(error.response.statusText)
         console.log(error.response)
         dispatch({
             type: CLOSE_LOADING
@@ -127,7 +139,7 @@ export async function deleteUserAction(discriptionKey, dispatch) {
             })
         }
     } catch (error) {
-        alert(error.response.data.content)
+        alert(error.response.statusText)
         console.log(error.response)
         dispatch({
             type: CLOSE_LOADING
@@ -145,7 +157,9 @@ export async function editUserAction(userModel, dispatch) {
     try {
         const result = await managerUserService.editAccountService(userModel)
         console.log(result)
-
+        if (result.status === FORBIDDEN) {
+            alert("Forbidden")
+        }
         if (result.status === SUCCESS) {
             alert("Edit User Success")
 
@@ -156,7 +170,7 @@ export async function editUserAction(userModel, dispatch) {
             type: CLOSE_LOADING
         })
     } catch (error) {
-        alert(error.response.data.content)
+        alert(error.response.statusText)
         console.log(error.response)
         dispatch({
             type: CLOSE_LOADING

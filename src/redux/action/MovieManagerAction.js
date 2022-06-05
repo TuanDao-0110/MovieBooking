@@ -24,6 +24,7 @@ export const uploadFilmAction = (formData) => {
             const result = await movieManagerService.uploadPhim(formData)
             alert('Upload Success')
             console.log(result)
+            history.push('/admin/film')
         } catch (error) {
             console.log(error.response.data)
         }
@@ -56,7 +57,7 @@ export const updateFilmAdmin = (filmModel) => {
             history.push('/admin/film')
         } catch (error) {
             console.log(error.response)
-            alert('Can not update this Film because you did not created this Film')
+            alert( error.response.data.content)
         }
     }
 }

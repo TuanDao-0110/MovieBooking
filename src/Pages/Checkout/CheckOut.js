@@ -3,7 +3,7 @@ import { ACCOUNT } from '../../utilities/Setting/config'
 import style from './CheckOut.module.css'
 import { useSelector, useDispatch, } from 'react-redux'
 import { bookingAction, postBookingTicketAction, removeBookingAction, takingBookingTicketAction } from '../../redux/action/BookingTicketAction'
-import { ACTIVE_CHANGE, BOOKING_SEAT_REDUCER, BOOKING_SEAT_REMOVE_REDUCER, OPEN_MODAL_BOOKING_DETAILS, ORDER_BOOKING_FROM_SERVER, } from '../../redux/type/MovieManagerType'
+import { ACTIVE_CHANGE, BOOKING_SEAT_REDUCER, BOOKING_SEAT_REMOVE_REDUCER, OPEN_MODAL_BOOKING_DETAILS, ORDER_BOOKING_FROM_SERVER, REMOVE_ALL_TEMP_BOOKING, } from '../../redux/type/MovieManagerType'
 import _ from 'lodash'
 import moment from 'moment'
 import { Button, Tabs } from 'antd';
@@ -15,13 +15,12 @@ let newAccount = '';
 let newEmail = '';
 let newPhone = '';
 let newName = ''
-function BookingConfirm() {
+export function BookingConfirm() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(userManagerBookingInfo())
   }, [])
   const { bookingInforUser } = useSelector((state) => state.UserReducer)
-  console.log(bookingInforUser)
   return <>
     <div className="min-h-screen bg-gradient-to-tr from-red-300 to-yellow-200 flex justify-center items-center ">
       <div className="md:px-4 md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 space-y-4 md:space-y-0" >
@@ -30,7 +29,10 @@ function BookingConfirm() {
           return <div key={index} className="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
             <h3 className="mb-3 text-xl font-bold text-indigo-600">{bookingInfor.tenPhim}</h3>
             <div className="relative">
-              <img className="w-1/2 m-auto rounded-xl" src={bookingInfor.hinhAnh} alt="Colors" />
+              <img className="w-20 m-auto h-36 rounded-xl" src={bookingInfor.hinhAnh} alt="Colors" onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src = "https://api.lorem.space/image/movie?w=150&h=220";
+              }} />
               <p className="absolute top-0 bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-br-lg rounded-tl-lg">Booked</p>
             </div>
             <div className="my-4">
@@ -67,7 +69,7 @@ function BookingConfirm() {
                   </svg>
 
                 </span>
-                <p>{bookingInfor.danhSachGhe?.[1].tenHeThongRap}</p>
+                <p>{bookingInfor.danhSachGhe?.[0].tenHeThongRap}</p>
               </div>
 
               <button className="mt-4 text-xl w-full text-white bg-indigo-600 py-2 rounded-xl shadow-lg" onClick={() => {
@@ -102,7 +104,7 @@ function CheckOut(props) {
       //   return [...result, ...arrSeat]
 
       // }, [])
-      console.log('new array', listSeatArray)
+      // console.log('new array', listSeatArray)
       // dispatch({
       //   type: ORDER_BOOKING_FROM_SERVER,
       //   listUnvailableSeat
@@ -170,7 +172,10 @@ function CheckOut(props) {
       <div className='grid grid-cols-12'>
         <div className='col-span-1'>
 
-          <button onClick={() => {
+          <button className='hover:bg-red-300' onClick={() => {
+            dispatch({
+              type: REMOVE_ALL_TEMP_BOOKING
+            })
             props.history.goBack()
           }}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -180,6 +185,9 @@ function CheckOut(props) {
         </div>
         <div className='col-span-1 col-start-9'>
           <button onClick={() => {
+            dispatch({
+              type: REMOVE_ALL_TEMP_BOOKING
+            })
             props.history.push('/')
           }}><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -296,7 +304,10 @@ export default function (props) {
       <span>
         Hello ! <Button onClick={() => {
           props.history.push('/profile')
-        }}>{newAccount}</Button>
+        }}>{newAccount} - Click to go Your Account's Profile</Button>
+        <Button className='ml-2' onClick={()=>{
+          props.history.push('/')
+        }}> Back Home Page</Button>
       </span>
     </>
   const dispatch = useDispatch()

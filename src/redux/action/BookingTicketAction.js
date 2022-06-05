@@ -6,6 +6,7 @@ import { history } from "../../App";
 export const takingBookingTicketAction = (bookingId) => {
 
     return async dispatch => {
+
         try {
             dispatch({
                 type: OPEN_LOADING
@@ -36,21 +37,29 @@ export const postBookingTicketAction = (bookingModel) => {
             dispatch({
                 type: OPEN_LOADING
             })
-            const result = await bookingManagerService.postBookingDetailService(bookingModel)
-            if (result.status === SUCCESS) {
-                dispatch({
-                    type: CONFIRM_BOOKING_REDUCER
-                })
-                await dispatch(takingBookingTicketAction(bookingModel.maLichChieu));
+            console.log('booking Model', bookingModel.danhSachVe.length)
+            if (bookingModel.danhSachVe.length > 0) {
 
-                await dispatch({
-                    type: CLOSE_LOADING
-                })
-                alert('BOOKING DONE')
-                dispatch({
-                    type: SWITCH_TAB
-                })
+                const result = await bookingManagerService.postBookingDetailService(bookingModel)
+                if (result.status === SUCCESS) {
+                    dispatch({
+                        type: CONFIRM_BOOKING_REDUCER
+                    })
+                    await dispatch(takingBookingTicketAction(bookingModel.maLichChieu));
+
+                   
+                    alert('BOOKING DONE')
+                       dispatch({
+                type: SWITCH_TAB
+            })
+                }
+            }else{
+                alert('Please Choose Ticket Before Booking')
             }
+            await dispatch({
+                type: CLOSE_LOADING
+            })
+
         } catch (error) {
             console.log(error)
             dispatch({
@@ -73,7 +82,7 @@ export const bookingAction = (seat, movieCalendarId,) => {
         // call API to back-end
         let presentBookingSeatArr = getState().TicketBookingReducer.presentBookingSeatArr
         let account = JSON.parse(localStorage.getItem(ACCOUNT)).taiKhoan
-        console.log('detai', presentBookingSeatArr)
+        // console.log('detai', presentBookingSeatArr)
         //call API signlR ==> this will be send to back-end though TCL in case some thing change
         // connection.invoke('datGhe', account, JSON.stringify(presentBookingSeatArr), movieCalendarId)
     }

@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 
 import _ from 'lodash'
 import { Option } from 'antd/lib/mentions';
+import { ADMIN } from '../../redux/type/utility'
 const { Header, Sider, Content } = Layout;
 
 export default function AdminTemplate(props) {
@@ -24,12 +25,14 @@ export default function AdminTemplate(props) {
     const [visible, setVisile] = useState(true)
     let account = '';
     let name = '';
-    let newemail = ''
+    let newemail = '';
+    let userType = ''
     if (!_.isEmpty(localStorage.getItem(ACCOUNT))) {
-        let { taiKhoan, hoTen, email, } = JSON.parse(localStorage.getItem(ACCOUNT))
+        let { taiKhoan, hoTen, email, maLoaiNguoiDung } = JSON.parse(localStorage.getItem(ACCOUNT))
         account = taiKhoan
         name = hoTen
         newemail = email
+        userType = maLoaiNguoiDung
     }
     const { Component, ...restRoute } = props // props = path, exact vs Component
     useEffect(() => {
@@ -38,8 +41,8 @@ export default function AdminTemplate(props) {
     return (
         < >
             <Route {...restRoute} render={(propsRoute) => { // propsRoute = props.location, props.history,props.match ....  (propsRoute property is return from Route)
-                return <div className='h-full'>
-                    <Layout style={{ height: '100vh' }}>
+                return <div className=''>
+                    <Layout style={{ height: '100%' }} className='h-screen'>
                         <Sider trigger={null} collapsible collapsed={collapsed}>
                             <div className="logo" />
 
@@ -59,7 +62,7 @@ export default function AdminTemplate(props) {
                                     </Menu.Item>
                                 </SubMenu>
 
-                                <Menu.Item key='7' icon={<UserOutlined></UserOutlined>}> <NavLink to={'/admin/showtimes'}>ShowTime</NavLink></Menu.Item>
+                                {/* <Menu.Item key='7' icon={<UserOutlined></UserOutlined>}> <NavLink to={'/admin/showtimes'}>ShowTime</NavLink></Menu.Item> */}
 
                             </Menu>
 
@@ -90,16 +93,16 @@ export default function AdminTemplate(props) {
                                             </button>
 
                                             <div className="absolute top-10 right-0 z-20 w-56 py-2 mt-4 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800 " style={{ visibility: `${visible ? 'hidden' : ''}` }} >
-                                                <div className="flex  items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => history.push('/login')} >{t('signin')}</div>
-                                                <div className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => history.push('/register')}>{t('signup')}</div>
-                                                <div className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => {
+                                                <div className="flex  items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer uppercase" onClick={() => history.push('/login')} >{t('signin')}</div>
+                                                <div className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer uppercase" onClick={() => history.push('/')}>{t('Home Menu')}</div>
+                                                <div className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer uppercase" onClick={() => {
 
                                                     localStorage.clear()
                                                     history.push('/')
                                                     window.location.reload()
                                                 }}>{t('signout')}</div>
 
-                                                <div className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => history.push('/profile')}>{t('profile')}</div>
+                                                <div className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white uppercase cursor-pointer" onClick={() => history.push('/profile')}>{t('profile')}</div>
 
                                             </div>
                                         </div>
@@ -122,6 +125,7 @@ export default function AdminTemplate(props) {
                     </Layout>
                 </div>
             }}></Route>
+
         </>
 
 
