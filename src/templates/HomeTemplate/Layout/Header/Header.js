@@ -1,21 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Avatar, Select } from 'antd'
-import { Option } from 'antd/lib/mentions'
-import React, { useState, Suspense } from 'react'
-import { NavLink } from 'react-router-dom'
-import { history } from '../../../../App'
+
+import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { ACCOUNT } from '../../../../utilities/Setting/config'
 import _ from 'lodash'
 import { useDispatch } from 'react-redux'
-import { REMOVE_ALL_USER_INFOR } from '../../../../redux/type/MovieManagerType'
-import { ADMIN } from '../../../../redux/type/utility'
-import { Alert } from 'antd';
-
+import style from './Header.module.scss'
+import Home from '../../../../Pages/HomePages/HomeMenu/Home'
 export function Header(props) {
-    const { t, i18n, ready } = useTranslation();
-    const [visible, setVisile] = useState(true)
-    const [adminAlert, setAdminAlert] = useState(false)
     let account = '';
     let name = '';
     let newemail = '';
@@ -30,110 +22,54 @@ export function Header(props) {
     }
     const dispath = useDispatch()
     return (
-        <header header className="p-4 bg-gray-800/80 text-gray-100 fixed w-full z-20 " >
-            <div className="container flex justify-between h-16 mx-auto">
-                <NavLink to={'/'} href="#" aria-label="Back to homepage" className="flex items-center p-2">
-                    <img className='w-full h-full' src='data:image/png;base64,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' alt=''></img>
-                </NavLink>
-                {/* 1. Menu Film */}
-                <ul className="items-stretch hidden space-x-3 sm:flex">
-                    <li className="flex">
-                        <NavLink rel="noopener noreferrer" to="/home" className="flex items-center px-4 -mb-1 border-b-2  border-transparent text-white " activeClassName='border-b-1 border-white' >Home</NavLink>
+        <section className={`${style['banner']}`} >
+            <Home></Home>
+{/* <h1 className='text-white'> this is not </h1> */}
+            <label for="menu-control" className={`${style['hamburger']}`}>
+                <i className={`${style['hamburger__icon']}`}></i>
+                <i className={`${style['hamburger__icon']}`}></i>
+                <i className={`${style['hamburger__icon']}`}></i>
+            </label>
+
+            <input type="checkbox" id="menu-control" className={`${style['menu-control']}`} />
+
+            <aside className={style.sidebar}>
+
+                <nav className={style.sidebar__menu}>
+                    <a href="">Home</a>
+                    
+                </nav>
+
+                <label for="menu-control" className={`${style['sidebar__close']}`}></label>
+
+                <ul className={`${style['sidebar__social']}`}>
+                    <li>
+                        <a href="">
+                            <svg viewBox="0 0 14 14" fill="none">
+                                <path d="M13.16 3.88c-.031-.702-.145-1.184-.307-1.601a3.219 3.219 0 00-.763-1.17 3.247 3.247 0 00-1.168-.761c-.42-.162-.9-.276-1.6-.307C8.614.008 8.39 0 6.598 0 4.808 0 4.583.008 3.88.039c-.7.03-1.183.144-1.6.306a3.22 3.22 0 00-1.17.763c-.336.33-.596.73-.761 1.168-.162.42-.276.9-.307 1.601C.008 4.583 0 4.807 0 6.599c0 1.792.008 2.016.039 2.72.03.7.144 1.183.306 1.6.168.444.428.841.763 1.17.33.336.73.596 1.168.761.42.163.9.276 1.601.307.704.031.928.039 2.72.039 1.791 0 2.016-.008 2.72-.039.7-.03 1.182-.144 1.6-.307a3.375 3.375 0 001.93-1.93c.163-.42.277-.9.308-1.601.03-.704.038-.928.038-2.72 0-1.791-.002-2.016-.033-2.72zM11.97 9.267c-.028.645-.136.993-.226 1.225a2.19 2.19 0 01-1.253 1.253c-.232.09-.583.198-1.225.226-.696.031-.905.039-2.665.039s-1.972-.008-2.666-.039c-.644-.028-.992-.136-1.224-.226a2.032 2.032 0 01-.758-.493 2.052 2.052 0 01-.492-.758c-.09-.232-.199-.582-.227-1.224-.031-.696-.039-.905-.039-2.666 0-1.76.008-1.972.039-2.665.028-.645.136-.993.227-1.225.105-.286.273-.546.495-.757.214-.22.471-.387.757-.493.232-.09.583-.198 1.225-.227.696-.03.905-.038 2.665-.038 1.764 0 1.972.007 2.666.038.644.029.992.137 1.224.227.286.106.547.273.758.493.22.214.387.471.493.757.09.232.198.583.226 1.225.031.696.04.905.04 2.665 0 1.761-.009 1.967-.04 2.663z" fill="#898989" />
+                                <path d="M6.6 3.21a3.39 3.39 0 100 6.78 3.39 3.39 0 000-6.78zm0 5.588a2.2 2.2 0 110-4.398 2.2 2.2 0 010 4.398zM10.915 3.075a.791.791 0 11-1.583 0 .791.791 0 011.582 0z" fill="#898989" />
+                            </svg>
+                        </a>
                     </li>
-                    <li className="flex">
-                        <NavLink rel="noopener noreferrer" to='/contact' className="flex items-center px-4 -mb-1 border-b-2 border-transparent  text-white " activeClassName='border-b-1 border-white'>Contact</NavLink>
+                    <li>
+                        <a href="">
+                            <svg viewBox="0 0 14 14" fill="none">
+                                <path d="M11.6472 0H1.54609C.693574 0 0 .693574 0 1.54609V11.6472c0 .8525.693574 1.5461 1.54609 1.5461H11.6472c.8525 0 1.5461-.6936 1.5461-1.5461V1.54609C13.1933.693574 12.4997 0 11.6472 0zm.5153 11.6472c0 .2842-.2311.5153-.5153.5153H8.70962V7.96235h1.59218l.2631-1.59763H8.70962V5.25669c0-.43741.33563-.77304.77304-.77304h1.05654V2.88603H9.48266c-1.31219 0-2.3701 1.06293-2.3701 2.37515v1.10354H5.56591v1.59763h1.54665v4.20015H1.54609c-.28417 0-.51537-.2311-.51537-.5153V1.54609c0-.28417.2312-.51537.51537-.51537H11.6472c.2842 0 .5153.2312.5153.51537V11.6472z" fill="#888" />
+                            </svg>
+                        </a>
                     </li>
-                    <li className="flex">
-                        <NavLink rel="noopener noreferrer" to="/new" className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white" activeClassName='border-b-1 border-white'>New</NavLink>
+                    <li>
+                        <a href="">
+                            <svg viewBox="0 0 14 14" fill="none">
+                                <path d="M6.59664 0C2.97108 0 0 2.99685 0 6.6224c0 3.6045 2.94401 6.5709 6.59664 6.5709 3.64806 0 6.59666-2.962 6.59666-6.5709C13.1933 2.99685 10.2222 0 6.59664 0zM7.7562 12.3043c-.37102.0773-.76529.1159-1.15956.1159-.39428 0-.78855-.0386-1.15957-.1159v-1.8089c0-.433.11596-.58756.27057-.79632.07871-.08999.12622-.17072.47922-.70339l-.59518-.09281C4.06099 8.67872 3.45806 7.88242 3.2184 7.26399c-.30922-.8271-.14686-1.86305.40977-2.52004.08505-.10056.15461-.27067.09281-.44843-.11606-.35562-.10056-.9199-.02326-1.13641.40988.05858.83133.3522 1.18282.56438.16196.09452.24691.06956.32462.07731.28244-.05879.72301-.20102 1.39923-.20102.41742 0 .85809.06181 1.29102.18551.0774-.00181.20182.06402.41742-.0618.3674-.22386.77456-.50741 1.18272-.56438.0773.21651.0928.78079-.02315 1.13641-.06191.17776.00765.34787.0928.44843.5565.65709.7189 1.69294.40968 2.52004-.23967.61843-.8426 1.41473-2.37329 1.63889l-.59518.09281c.36488.55059.40333.61662.47933.70339.1545.20876.27046.36332.27046.79632v1.8089zm.77304-.2242v-1.5847c0-.4407-.0928-.73442-.21651-.95093C9.4878 9.2276 10.3227 8.53176 10.6938 7.53455c.3942-1.05125.2165-2.30362-.4407-3.16947.116-.51788.116-1.34508-.1623-1.7316-.12368-.17001-.29379-.26281-.5102-.26281h-.00775c-.59941.03241-1.07119.33428-1.57699.64158-.46382-.12371-.9354-.18551-1.40697-.18551-.47923 0-.95856.06956-1.38363.18551-.53248-.32109-.99972-.60998-1.61574-.64158-.19326 0-.36337.0928-.48708.26281-.27822.38652-.27822 1.21372-.16226 1.7316-.65719.86585-.83495 2.12587-.44067 3.16947.37102.99721 1.20596 1.69305 2.38103 2.00992-.09593.16779-.17182.3843-.20172.67733-.23734.0818-.44319.1085-.63464.0522-.20191-.0597-.35924-.1944-.49593-.42434-.307-.51577-.82992-.93681-1.4253-.88206l.06794.77003c.2757-.02527.55009.26647.69262.50687.23514.396.5519.6557.94175.7709.28938.0852.55391.0832.83877.0224v1.0423C2.41445 11.2916.773043 9.14255.773043 6.6224c0-3.20038 2.623217-5.849357 5.823597-5.849357 3.20037 0 5.82356 2.648977 5.82356 5.849357 0 2.52015-1.6414 4.6692-3.89096 5.4577z" fill="#888" />
+                            </svg>
+                        </a>
                     </li>
-                    {userType === ADMIN ? <li className="flex">
-                        <NavLink rel="noopener noreferrer" to="/admin" className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white" activeClassName='border-b-1 border-white'>Admin Films</NavLink>
-                    </li> : <li className='flex'><a className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white" onClick={() => { setAdminAlert(!adminAlert) }}>admin</a> </li>}
-                    {adminAlert ? alert('For Admin Only !!') : ''}
                 </ul>
-                {/* Account Control lg-screen */}
-                <div className="items-center flex-shrink-0 sm:hidden  lg:flex ">
-
-                    <div className='relative  items-center flex' onMouseOver={() => {
-                        setVisile(false)
-                    }} onMouseLeave={() => {
-                        setVisile(true)
-                    }}>
-
-                        <span className="p-4 text-rose-300 " >Hello ! {account ? account : '  Guest'} <button >
-
-                            <Avatar style={{ color: 'black', backgroundColor: '#fff' }} className='uppercase'>{name.slice(0, 2)}</Avatar>
+            </aside>
+        </section>
 
 
-                        </button></span>
-                        <div className="absolute top-10 right-0 z-20 w-56 py-5 mt-5 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800 " style={{ visibility: `${visible ? 'hidden' : ''}` }} >
 
-
-                            <div className="flex uppercase cursor-pointer items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => history.push('/profile')}>{t('profile')}</div>
-
-                        </div>
-                    </div>
-
-                    {account ? <button className="self-center px-8 py-3 font-semibold uppercase rounded dark:bg-violet-400 dark:text-gray-900" onClick={() => {
-                        localStorage.clear()
-                        dispath({
-                            type: REMOVE_ALL_USER_INFOR
-                        })
-                        history.push('/')
-                        // window.location.reload()
-                    }} >{t('signout')}</button> : <>
-                        <button className="self-center px-8 py-3 rounded uppercase" onClick={() => history.push('/login')} >{t('signin')}</button>
-
-                        <button className="self-center px-8 py-3 rounded uppercase" onClick={() => history.push('/register')} >{t('signup')}</button>
-                    </>}
-
-                    <div className="self-center px-5 py-3 " >
-                        <Select defaultValue='English' className='w-24' onChange={(e) => {
-                            i18n.changeLanguage(e)
-
-                        }} >
-                            <Option value='en'>Engish</Option>
-                            <Option value='chi'>Chinese</Option>
-                            <Option value='suomi'>Finnish</Option>
-
-                        </Select>
-                    </div>
-
-
-                </div>
-                <div className='relative lg:hidden items-center flex' onMouseOver={() => {
-                    setVisile(false)
-                }} onMouseLeave={() => {
-                    setVisile(true)
-                }}>
-
-                    <span className="p-4  " >hello ! {account}  <button >
-
-                        {/* <img alt="" className="w-12 h-12 border rounded-full bg-gray-500 border-gray-300" src="https://source.unsplash.com/40x40/?portrait?1" /> */}
-                        <Avatar style={{ color: 'black', backgroundColor: '#fff' }} className='uppercase'>{name.slice(0, 2)}</Avatar>
-
-                        {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-gray-100">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg> */}
-                    </button></span>
-                    <div className="absolute top-10 right-0 z-20 w-56 py-5 mt-5 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800 " style={{ visibility: `${visible ? 'hidden' : ''}` }} >
-                        <div className="flex uppercase cursor-pointer  items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => history.push('/login')} >{t('signin')}</div>
-                        <div className="flex uppercase cursor-pointer items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => history.push('/register')}>{t('signup')}</div>
-                        <div className="flex uppercase cursor-pointer items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => {
-
-                            localStorage.clear()
-                            dispath({
-                                type: REMOVE_ALL_USER_INFOR
-                            })
-                            history.push('/')
-                            // window.location.reload()
-                        }}>{t('signout')}</div>
-
-                        <div className="flex uppercase cursor-pointer items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => history.push('/profile')}>{t('profile')}</div>
-
-                    </div>
-                </div>
-            </div>
-        </header >
     )
 }

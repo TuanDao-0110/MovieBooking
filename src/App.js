@@ -2,7 +2,7 @@ import { Router } from 'react-router-dom';
 import './App.css';
 import { createBrowserHistory } from 'history'
 import { HomeTemplate } from './templates/HomeTemplate/HomeTemplate';
-import Home from './Pages/HomePages/Home';
+import Home from './Pages/HomePages/HomeMenu/Home';
 import Contact from './Pages/ContactPages/Contact'
 import New from './Pages/News/New'
 import Register from './Pages/RegisterPages/Register'

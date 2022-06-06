@@ -1,0 +1,15 @@
+$font: 'Open Sans', Helvetica, Arial, sans-serif;
+$creditsAT: 0.7s;
+
+.ant-carousel   {
+	.slick-dots {
+		// margin-bottom: 50px;
+		width: auto !important;
+		display: none;
+	}
+}
+.imgHome {
+	box-shadow: 2px 2px 143px 46px rgba(232,214,214,1);
+-webkit-box-shadow: 2px 2px 143px 46px rgba(232,214,214,1);
+-moz-box-shadow: 2px 2px 143px 46px rgba(232,214,214,1);
+}

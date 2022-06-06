@@ -7,7 +7,7 @@ import { getCarouselAction } from '../../../../redux/action/CarouselAction';
 import './HomeCarousel.css'
 import { width } from 'tailwindcss/defaultTheme';
 const contentStyle = {
-    // height: '100%',
+    height: '1000px',
     color: '#fff',
     lineHeight: '360px',
     textAlign: 'center',
@@ -27,8 +27,8 @@ export default function HomeCarouselAnt() {
     const renderListMovie = () => {
         return listMovie?.map((item, index) => {
             return <div className='' key={index} >
-                <div className='opacity-75 ' style={{ ...contentStyle, backgroundImage: ` `, }} >
-                    <img src={item.hinhAnh} className='w-full ' style={{ width: "window.innerWidth", }} alt='' />
+                <div className='opacity-75 ' style={{ ...contentStyle, backgroundImage: ` `, minHeight:''}} >
+                    <img src={item.hinhAnh} className='w-full  ' style={{ width: "window.innerWidth", minHeight:'100%' }} alt='' />
                 </div>
             </div>
         })
