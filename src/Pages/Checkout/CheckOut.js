@@ -42,7 +42,7 @@ export function BookingConfirm() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </span>
-                <p>{bookingInfor.thoiLuongPhim} Minutes</p>
+                <p className='text-black'>{bookingInfor.thoiLuongPhim} Minutes</p>
               </div>
               <div className="flex space-x-1 items-center">
                 <span>
@@ -50,7 +50,7 @@ export function BookingConfirm() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </span>
-                <p> <span className='text-red-500'> {bookingInfor.danhSachGhe.length}</span> Tickets Booked</p>
+                <p className='text-black'> <span className='text-red-500'> {bookingInfor.danhSachGhe.length}</span > Tickets Booked</p>
               </div>
               <div className="flex space-x-1 items-center">
                 <span>
@@ -58,7 +58,7 @@ export function BookingConfirm() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </span>
-                <p>{moment(bookingInfor.ngayDat).format("DD-MM-YY , HH:MM A")}</p>
+                <p className='text-black'>{moment(bookingInfor.ngayDat).format("DD-MM-YY , HH:MM A")}</p>
               </div>
 
               <div className="flex space-x-1 items-center">
@@ -69,7 +69,7 @@ export function BookingConfirm() {
                   </svg>
 
                 </span>
-                <p>{bookingInfor.danhSachGhe?.[0].tenHeThongRap}</p>
+                <p className='text-black'>{bookingInfor.danhSachGhe?.[0].tenHeThongRap}</p>
               </div>
 
               <button className="mt-4 text-xl w-full text-white bg-indigo-600 py-2 rounded-xl shadow-lg" onClick={() => {
