@@ -108,7 +108,7 @@ export const HomeTemplate = (props) => {
                                     <div className="text-red-500 text-4xl">
                                         <Popover content={content} title="">
 
-                                            Hello! {!_.isEmpty(localStorage.getItem(ACCOUNT)) ? <Avatar size={64} className='text-2xl'>{name.slice(0, 2)}</Avatar> : <Avatar size={64}>Guest</Avatar>}
+                                       123     Hello! {!_.isEmpty(localStorage.getItem(ACCOUNT)) ? <Avatar size={64} className='text-2xl'>{name.slice(0, 2)}</Avatar> : <Avatar size={64}>Guest</Avatar>}
                                         </Popover>
                                     </div>
 
