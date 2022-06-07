@@ -33,9 +33,9 @@ export const HomeTemplate = (props) => {
 
     const dispath = useDispatch()
     useEffect(() => {
-        dispath({
-            type: OPEN_LOADING
-        })
+        // dispath({
+        //     type: OPEN_LOADING
+        // })
         if (!_.isEmpty(localStorage.getItem(ACCOUNT))) {
 
             dispath(userManagerBookingInfo())

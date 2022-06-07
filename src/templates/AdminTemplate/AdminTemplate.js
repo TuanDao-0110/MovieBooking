@@ -1,12 +1,12 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { Route } from 'react-router-dom'
-import { Avatar, Layout, Menu, Select } from 'antd';
+import { Avatar, Layout, Menu, } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     UserOutlined,
     VideoCameraOutlined,
-    UploadOutlined,
+    
 } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import SubMenu from 'antd/lib/menu/SubMenu';
@@ -15,8 +15,7 @@ import { history } from '../../App';
 import { useTranslation } from 'react-i18next';
 
 import _ from 'lodash'
-import { Option } from 'antd/lib/mentions';
-import { ADMIN } from '../../redux/type/utility'
+
 const { Header, Sider, Content } = Layout;
 
 export default function AdminTemplate(props) {
