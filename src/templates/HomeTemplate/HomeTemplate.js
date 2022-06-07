@@ -36,7 +36,10 @@ export const HomeTemplate = (props) => {
         dispath({
             type: OPEN_LOADING
         })
-        dispath(userManagerBookingInfo())
+        if (!_.isEmpty(localStorage.getItem(ACCOUNT))) {
+
+            dispath(userManagerBookingInfo())
+        }
 
         window.scrollTo(0, 0)
         setTimeout(() => {

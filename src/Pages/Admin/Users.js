@@ -14,12 +14,11 @@ export default function Users() {
   const [userList, setUserList] = useState()
   // get User Function 
   const getListUser = () => {
-    takeUserListAction().then(e => setUserList(e.data.content))
     dispatch({ type: OPEN_LOADING })
-    setTimeout(() => {
-
-      dispatch({ type: CLOSE_LOADING })
-    }, 3000);
+    takeUserListAction().then(e => setUserList(e.data.content))
+      setTimeout(() => {
+        dispatch({ type: CLOSE_LOADING })
+    }, 2000);
   }
   // findUser Function 
   const findUser = (value) => {
@@ -34,9 +33,7 @@ export default function Users() {
   }
   // dispatch 
   const dispatch = useDispatch()
-  dispatch({
-    type: OPEN_LOADING
-  })
+
   // renderDidMount to clone listuser date from API : 
   // 1. setTimeout to on/off Loading component
   useEffect(() => {

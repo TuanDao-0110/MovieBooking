@@ -31,10 +31,11 @@ export default function Film(props) {
   data = arrFilmDefault
   console.log(data)
   const dispatch = useDispatch()
+  useEffect(() => {
   dispatch({
     type: OPEN_LOADING
   })
-  useEffect(() => {
+
     dispatch(takeFilmAction())
   }, [])
 

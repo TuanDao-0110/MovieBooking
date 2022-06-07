@@ -2,7 +2,7 @@ import React, { useTransition } from 'react'
 import { useFormik } from 'formik';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { UserManagerAction } from '../../redux/action/UserManagerAction';
+import { UserManagerAction, userManagerBookingInfo } from '../../redux/action/UserManagerAction';
 export default function Login(props) {
 
   const dispatch = useDispatch()
@@ -17,7 +17,6 @@ export default function Login(props) {
         matKhau: values.password
       }
       dispatch(UserManagerAction(dataUser))
-
     },
   });
 
