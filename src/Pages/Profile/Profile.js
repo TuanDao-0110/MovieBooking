@@ -60,12 +60,12 @@ export default function Profile() {
         // 3. Formik Function
         const formik = useFormik({
             initialValues: {
-                "account": dataUser.current.taiKhoan,
-                "password": dataUser.current.matKhau,
-                "email": dataUser.current.email,
-                "phone": dataUser.current.soDT,
-                "name": dataUser.current.hoTen,
-                'type': dataUser.current.loaiNguoiDung?.slice(0, 1) === "Q" ? "QuanTri" : "KhachHang",
+                "account": userProfile.taiKhoan,
+                "password": userProfile.matKhau,
+                "email": userProfile.email,
+                "phone": userProfile.soDT,
+                "name": userProfile.hoTen,
+                'type': userProfile.loaiNguoiDung?.slice(0, 1) === "Q" ? "QuanTri" : "KhachHang",
             },
             onSubmit: values => {
                 const data = {
