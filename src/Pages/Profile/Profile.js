@@ -16,15 +16,17 @@ export default function Profile() {
     }
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch({
-            type: OPEN_LOADING
-        })
+    
+    
+    
+
+
 
     }, [])
 
 
     let { userProfile } = useSelector(state => state.UserReducer)
- 
+
     function YourFile(props) {
         // 1. dataSubmit  User to Server  vs dataUser taken from localStore vs use Destructor method to clone all data from localStore
         let dataUser = useRef()
@@ -150,7 +152,7 @@ export default function Profile() {
         )
     }
     return (
-    
+
 
         <div className='container m-auto py-28 '>
 
