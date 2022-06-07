@@ -3,7 +3,7 @@ import { ACCOUNT } from '../../utilities/Setting/config'
 import style from './CheckOut.module.css'
 import { useSelector, useDispatch, } from 'react-redux'
 import { bookingAction, postBookingTicketAction, removeBookingAction, takingBookingTicketAction } from '../../redux/action/BookingTicketAction'
-import { ACTIVE_CHANGE, BOOKING_SEAT_REDUCER, BOOKING_SEAT_REMOVE_REDUCER, OPEN_MODAL_BOOKING_DETAILS, ORDER_BOOKING_FROM_SERVER, REMOVE_ALL_TEMP_BOOKING, } from '../../redux/type/MovieManagerType'
+import { ACTIVE_CHANGE, BOOKING_SEAT_REDUCER, BOOKING_SEAT_REMOVE_REDUCER, OPEN_LOADING, OPEN_MODAL_BOOKING_DETAILS, ORDER_BOOKING_FROM_SERVER, REMOVE_ALL_TEMP_BOOKING, } from '../../redux/type/MovieManagerType'
 import _ from 'lodash'
 import moment from 'moment'
 import { Button, Tabs } from 'antd';
@@ -17,8 +17,8 @@ let newPhone = '';
 let newName = ''
 export function BookingConfirm() {
   const dispatch = useDispatch()
+  
   useEffect(() => {
-    dispatch(userManagerBookingInfo())
   }, [])
   const { bookingInforUser } = useSelector((state) => state.UserReducer)
   return <>

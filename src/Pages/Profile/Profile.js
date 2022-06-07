@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { Tabs } from 'antd';
 import { BookingConfirm } from '../Checkout/CheckOut';
 import ModalEditUser from '../../Components/Modal/ModalEditUser';
@@ -8,6 +8,7 @@ import { editUserAction } from '../../redux/action/UserManagerAction';
 import { ACCOUNT } from '../../utilities/Setting/config';
 import _ from 'lodash'
 import { CLOSE_LOADING, OPEN_LOADING } from '../../redux/type/MovieManagerType';
+import Loading from '../../Components/Loading/Loading';
 const { TabPane } = Tabs;
 
 export default function Profile() {
@@ -15,13 +16,9 @@ export default function Profile() {
         // console.log(key);
     }
     const dispatch = useDispatch()
+
     useEffect(() => {
-    
-    
-    
-
-
-
+     
     }, [])
 
 

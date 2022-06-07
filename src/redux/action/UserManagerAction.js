@@ -58,7 +58,7 @@ export const userManagerBookingInfo = () => {
                 bookingInforUser: result.data.content.thongTinDatVe,
                 userProfile: result.data.content
             })
-          await  dispatch({
+            dispatch({
                 type: CLOSE_LOADING
             })
         } catch (error) {

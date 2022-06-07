@@ -34,6 +34,9 @@ export default function Users() {
   }
   // dispatch 
   const dispatch = useDispatch()
+  dispatch({
+    type: OPEN_LOADING
+  })
   // renderDidMount to clone listuser date from API : 
   // 1. setTimeout to on/off Loading component
   useEffect(() => {
@@ -131,15 +134,15 @@ export default function Users() {
 
   return (
     <>
-    <h1> User List</h1>
-    <Search
-      placeholder="input search Key --- Click empty search to clone whole list"
-      onSearch={onSearch}
-      style={{
-        width: '100%',
-        marginBottom: '15'
-      }}
-    />
+      <h1> User List</h1>
+      <Search
+        placeholder="input search Key --- Click empty search to clone whole list"
+        onSearch={onSearch}
+        style={{
+          width: '100%',
+          marginBottom: '15'
+        }}
+      />
       <Space
         style={{
           marginBottom: 16,

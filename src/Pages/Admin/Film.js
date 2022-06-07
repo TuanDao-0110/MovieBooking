@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom';
 import { Popconfirm, message } from 'antd';
 import DeleteFilmAsking from '../../Components/Modal/DeleteFilmAsking';
 import { FILM_INFOR } from '../../redux/type/utility';
+import { OPEN_LOADING } from '../../redux/type/MovieManagerType';
 const confirm = (e) => {
   console.log(e);
   message.success('Click on Yes');
@@ -30,6 +31,9 @@ export default function Film(props) {
   data = arrFilmDefault
   console.log(data)
   const dispatch = useDispatch()
+  dispatch({
+    type: OPEN_LOADING
+  })
   useEffect(() => {
     dispatch(takeFilmAction())
   }, [])

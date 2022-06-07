@@ -14,6 +14,7 @@ import { Avatar } from "antd";
 import { Popover, Button } from 'antd';
 import { CLOSE_LOADING, OPEN_LOADING } from "../../redux/type/MovieManagerType";
 import { history } from "../../App";
+import { userManagerBookingInfo } from "../../redux/action/UserManagerAction";
 
 export const HomeTemplate = (props) => {
     const { Component, ...restRoute } = props // props = path, exact vs Component
@@ -35,13 +36,14 @@ export const HomeTemplate = (props) => {
         dispath({
             type: OPEN_LOADING
         })
+        dispath(userManagerBookingInfo())
 
         window.scrollTo(0, 0)
         setTimeout(() => {
             dispath({
                 type: CLOSE_LOADING
             })
-        }, 2000);
+        }, 1000);
     })
 
     const content = (
