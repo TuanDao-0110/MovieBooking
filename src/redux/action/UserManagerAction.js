@@ -53,12 +53,12 @@ export const userManagerBookingInfo = () => {
         })
         try {
             const result = await managerUserService.postUserBookingInfor()
-            dispatch({
+          await  dispatch({
                 type: USER_BOOKING_INFOR_REDUCER,
                 bookingInforUser: result.data.content.thongTinDatVe,
                 userProfile: result.data.content
             })
-            dispatch({
+          await  dispatch({
                 type: CLOSE_LOADING
             })
         } catch (error) {

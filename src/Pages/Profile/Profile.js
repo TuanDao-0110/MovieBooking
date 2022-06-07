@@ -19,17 +19,13 @@ export default function Profile() {
         dispatch({
             type: OPEN_LOADING
         })
-        setTimeout(() => {
-            dispatch({
-                type: CLOSE_LOADING
-            })
-        }, 2000)
+
     }, [])
     function YourFile() {
         // 1. dataSubmit  User to Server  vs dataUser taken from localStore vs use Destructor method to clone all data from localStore
         let dataUser = useRef()
         let { userProfile } = useSelector(state => state.UserReducer)
-
+        console.log('user', userProfile)
         let dataSubmit = useRef({
             "account": "",
             "password": "",
