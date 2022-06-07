@@ -12,7 +12,7 @@ export const HomeTemplate = (props) => {
         <Route {...restRoute} render={(propsRoute) => { // propsRoute = props.location, props.history,props.match ....  (propsRoute property is return from Route)
             return <>
                 <Suspense fallback='loading'>
-
+okokoko
                     <Header ></Header>
                 </Suspense>
                 {/* <HomeCarouselAnt></HomeCarouselAnt> */}
