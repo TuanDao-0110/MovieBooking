@@ -46,13 +46,10 @@ export default function AdminTemplate(props) {
                     <Layout style={{ height: '100vh' }} className='h-screen'>
                         <Sider trigger={null} collapsible collapsed={collapsed}>
                             <div className="logo" />
-
                             <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}   >
                                 <SubMenu key='1' title='User'>
-
                                     <Menu.Item key='2' icon={<UserOutlined></UserOutlined>}> <NavLink to={'/admin/users'}>User List</NavLink></Menu.Item>
                                     <Menu.Item key='3' icon={<UserOutlined></UserOutlined>}> <NavLink to={'/admin/addnewuser'}>Add New User</NavLink></Menu.Item>
-
                                 </SubMenu>
                                 <SubMenu key='4' icon={<></>} title="Films">
                                     <Menu.Item key='5' icon={<VideoCameraOutlined></VideoCameraOutlined>}>
@@ -62,11 +59,7 @@ export default function AdminTemplate(props) {
                                         <NavLink to={'/admin/film/addnew'}>AddNew</NavLink>
                                     </Menu.Item>
                                 </SubMenu>
-
-                                {/* <Menu.Item key='7' icon={<UserOutlined></UserOutlined>}> <NavLink to={'/admin/showtimes'}>ShowTime</NavLink></Menu.Item> */}
-
                             </Menu>
-
                         </Sider>
                         <Layout className="">
                             <Header className="" style={{ padding: 0, backgroundColor: '' }}>

@@ -11,7 +11,6 @@ export default (state = initialState, action) => {
         case OPEN_LOADING:
             return { ...state, loading: true }
         case CLOSE_LOADING:
-            console.log('close')
             return { ...state, loading: false }
         default:
             return state
