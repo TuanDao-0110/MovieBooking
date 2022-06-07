@@ -21,11 +21,14 @@ export default function Profile() {
         })
 
     }, [])
-    function YourFile() {
+
+
+    let { userProfile } = useSelector(state => state.UserReducer)
+ 
+    function YourFile(props) {
         // 1. dataSubmit  User to Server  vs dataUser taken from localStore vs use Destructor method to clone all data from localStore
         let dataUser = useRef()
-        let { userProfile } = useSelector(state => state.UserReducer)
-        console.log('user', userProfile)
+        let userProfile = props.userProfile
         let dataSubmit = useRef({
             "account": "",
             "password": "",
@@ -147,7 +150,7 @@ export default function Profile() {
         )
     }
     return (
-
+    
 
         <div className='container m-auto py-28 '>
 
@@ -159,7 +162,7 @@ export default function Profile() {
                     </div>
                 </TabPane>
                 <TabPane tab="Your Profile" key="2">
-                    <YourFile></YourFile>
+                    <YourFile userProfile={userProfile}></YourFile>
                 </TabPane>
 
             </Tabs>

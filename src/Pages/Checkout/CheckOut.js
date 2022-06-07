@@ -18,7 +18,10 @@ let newName = ''
 export function BookingConfirm() {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(userManagerBookingInfo())
+    
+         dispatch(userManagerBookingInfo())
+ 
+
   }, [])
   const { bookingInforUser } = useSelector((state) => state.UserReducer)
   return <>

@@ -55,6 +55,7 @@ export const HomeTemplate = (props) => {
                         })
                         try {
                             localStorage.clear()
+                            history.push('/')
                             setTimeout(() => {
                                 dispath({
                                     type: CLOSE_LOADING
@@ -108,7 +109,7 @@ export const HomeTemplate = (props) => {
                                     <div className="text-red-500 text-4xl cursor-pointer">
                                         <Popover content={content} title="">
 
-                                           Hello! {!_.isEmpty(localStorage.getItem(ACCOUNT)) ? <Avatar size={64} className='text-2xl'>{name.slice(0, 2)}</Avatar> : <Avatar size={64}>Guest</Avatar>}
+                                            Hello! {!_.isEmpty(localStorage.getItem(ACCOUNT)) ? <Avatar size={64} className='text-2xl'>{name.slice(0, 2)}</Avatar> : <Avatar size={64}>Guest</Avatar>}
                                         </Popover>
                                     </div>
 
