@@ -19,7 +19,7 @@ export default function Users() {
     setTimeout(() => {
 
       dispatch({ type: CLOSE_LOADING })
-    }, 500);
+    }, 3000);
   }
   // findUser Function 
   const findUser = (value) => {

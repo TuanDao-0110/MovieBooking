@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { uploadFilmAction } from '../../redux/action/MovieManagerAction'
 import {
     Form,
@@ -16,10 +16,21 @@ import { useFormik } from 'formik';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { GroupId } from '../../utilities/Setting/config';
+import { CLOSE_LOADING, OPEN_LOADING } from '../../redux/type/MovieManagerType';
 export default function AddNewFilms() {
     const [img, setImg] = useState('');
 
     const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch({
+            type: OPEN_LOADING
+        })
+        setTimeout(() => {
+            dispatch({
+                type: CLOSE_LOADING
+            })
+        }, 2000);
+    }, [])
     const formik = useFormik({
         initialValues: {
             movieName: '',
@@ -31,12 +42,12 @@ export default function AddNewFilms() {
             coming: false,
             rating: 0,
             pictureFile: {},
-            groupCode : GroupId
+            groupCode: GroupId
         },
         onSubmit: (values) => {
             // console.log(typeof (values))
             let formData = new FormData();
-            let formDataNameFomrServer = ['tenPhim', 'trailer', 'moTa', 'ngayKhoiChieu', 'dangChieu', 'hot', 'sapChieu', 'danhGia', 'File','maNhom']
+            let formDataNameFomrServer = ['tenPhim', 'trailer', 'moTa', 'ngayKhoiChieu', 'dangChieu', 'hot', 'sapChieu', 'danhGia', 'File', 'maNhom']
             let index = 0
             for (let key in values) {
                 // console.log(values[key])

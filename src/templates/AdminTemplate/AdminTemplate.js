@@ -36,13 +36,14 @@ export default function AdminTemplate(props) {
     }
     const { Component, ...restRoute } = props // props = path, exact vs Component
     useEffect(() => {
+        
         window.scrollTo(0, 0)
     })
     return (
         < >
             <Route {...restRoute} render={(propsRoute) => { // propsRoute = props.location, props.history,props.match ....  (propsRoute property is return from Route)
                 return <div className=''>
-                    <Layout style={{ height: '100%' }} className='h-screen'>
+                    <Layout style={{ height: '100vh' }} className='h-screen'>
                         <Sider trigger={null} collapsible collapsed={collapsed}>
                             <div className="logo" />
 

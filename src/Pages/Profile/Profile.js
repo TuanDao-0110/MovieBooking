@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Tabs } from 'antd';
 import { BookingConfirm } from '../Checkout/CheckOut';
 import ModalEditUser from '../../Components/Modal/ModalEditUser';
@@ -7,13 +7,24 @@ import { useFormik } from 'formik';
 import { editUserAction } from '../../redux/action/UserManagerAction';
 import { ACCOUNT } from '../../utilities/Setting/config';
 import _ from 'lodash'
+import { CLOSE_LOADING, OPEN_LOADING } from '../../redux/type/MovieManagerType';
 const { TabPane } = Tabs;
 
 export default function Profile() {
     const onChange = (key) => {
         // console.log(key);
     }
-
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch({
+            type: OPEN_LOADING
+        })
+        setTimeout(() => {
+            dispatch({
+                type: CLOSE_LOADING
+            })
+        }, 2000)
+    }, [])
     function YourFile() {
         // 1. dataSubmit  User to Server  vs dataUser taken from localStore vs use Destructor method to clone all data from localStore
         let dataUser = useRef()
@@ -58,7 +69,7 @@ export default function Profile() {
                 "email": dataUser.current.email,
                 "phone": dataUser.current.soDT,
                 "name": dataUser.current.hoTen,
-                'type': dataUser.current.loaiNguoiDung?.slice(0, 1) === "Q" ? "QuanTri" :"KhachHang",
+                'type': dataUser.current.loaiNguoiDung?.slice(0, 1) === "Q" ? "QuanTri" : "KhachHang",
             },
             onSubmit: values => {
                 const data = {
@@ -80,7 +91,7 @@ export default function Profile() {
                 {/* 4. Render Input Component */}
                 <div className="flex-1">
                     <div className="text-center">
-                        <h2 className="text-4xl font-bold text-center text-gray-700 ">Edit Your Profile : {dataUser.current.taiKhoan}</h2>
+                        <h2 className="text-4xl font-bold text-center text-red-700 ">Edit Your Profile : {dataUser.current.taiKhoan}</h2>
                     </div>
                     <div className="mt-8">
                         <form onSubmit={(e) => {
@@ -88,33 +99,33 @@ export default function Profile() {
                             formik.handleSubmit(e)
                         }} >
                             <div>
-                                <label htmlFor="text" className="text-sm text-gray-600 ">Account</label>
+                                <label htmlFor="text" className="text-sm text-red-600 ">Account</label>
                                 <input disabled type="text" name="account" id="text" placeholder="Your Account" className="block w-full px-4 py-2 mt-2 bg-gray-400 text-gray-700 placeholder-gray-400  border border-gray-200 rounded-md " onChange={formik.handleChange}
                                     value={formik.values.account} />
                             </div>
                             <div className="mt-6">
-                                <label htmlFor="email" className="text-sm text-gray-600">Email Addres</label>
+                                <label htmlFor="email" className="text-sm text-red-600">Email Addres</label>
                                 <input required type="email" name="email" id="email" placeholder="Your Email" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md" onChange={formik.handleChange}
                                     value={formik.values.email} />
                             </div>
                             <div className="mt-6">
-                                <label htmlFor="password" className="text-sm text-gray-600">Password</label>
+                                <label htmlFor="password" className="text-sm text-red-600">Password</label>
                                 <input required type="password" name="password" id="password" placeholder="input password" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md" onChange={formik.handleChange}
                                     value={formik.values.password} />
                             </div>
 
                             <div className="mt-6">
-                                <label htmlFor="" className="text-sm text-gray-600">Name</label>
+                                <label htmlFor="" className="text-sm text-red-600">Name</label>
                                 <input required type="" name="name" id="" placeholder="your name" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md" onChange={formik.handleChange}
                                     value={formik.values.name} />
                             </div>
                             <div className="mt-6">
-                                <label htmlFor="tel" className="text-sm text-gray-600">Phone Number</label>
+                                <label htmlFor="tel" className="text-sm text-red-600">Phone Number</label>
                                 <input type="tel" name="phone" id="phone" placeholder="Your Phone" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md" onChange={formik.handleChange}
                                     value={formik.values.phone} />
                             </div>
                             <div className="mt-6">
-                                <label htmlFor="text" className="text-sm text-gray-600">Customer Type</label>
+                                <label htmlFor="text" className="text-sm text-red-600">Customer Type</label>
                                 {/* <input type="tel" name="phone" id="phone" placeholder="Your Phone" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md" onChange={formik.handleChange}
 
                 value={formik.values.phone} /> */}
@@ -142,13 +153,12 @@ export default function Profile() {
     return (
 
 
-        <div className='container m-auto py-28'>
+        <div className='container m-auto py-28 '>
 
 
-            <Tabs defaultActiveKey="1" onChange={onChange}>
-                <TabPane tab="Your Booking Details" key="1">
+            <Tabs style={{ color: 'rgb(255 255 255)' }} defaultActiveKey="1" onChange={onChange}>
+                <TabPane style={{ color: "rgb(41 37 36)" }} tab="Your Booking Details" key="1">
                     <div className=''>
-
                         <BookingConfirm></BookingConfirm>
                     </div>
                 </TabPane>

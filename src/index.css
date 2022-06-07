@@ -16,8 +16,15 @@ html, body {
 body {
     min-height: 100%;
   font-family: 'Rozha One', serif;
-  background: hsl(220, 10%, 12%) !important;
+  background: hsl(255deg 6% 5% / 80%) !important;
 }
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.ant-carousel .slick-dots  {
+	 
+		margin-bottom: 50px;
+		width: auto !important;
+		display: none;
+	
+}

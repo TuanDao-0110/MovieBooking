@@ -21,7 +21,7 @@ export default function ModalEditUser(props) {
     renderModalEdit()
 
     return (
-        <Modal title="Confirm to " visible={props.isModalVisible} onOk={props.handleOk} onCancel={props.handleCancel} >
+        <Modal title="Confirm" visible={props.isModalVisible} onOk={props.handleOk} onCancel={props.handleCancel} >
             {/* {props.dataUser} */}
             <div className='grid grid-cols-3'>
                 <div className='col-span-1 text-lg'>State</div>

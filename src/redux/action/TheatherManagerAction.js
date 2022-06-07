@@ -1,5 +1,5 @@
 import { theaterManagerServices } from "../../Services/TheaterManagerServices"
-import { MOVIE_CALENDER_INFOR, THEATHER_CALENDAR_INFOR } from "../type/MovieManagerType"
+import { CLOSE_LOADING, MOVIE_CALENDER_INFOR, OPEN_LOADING, THEATHER_CALENDAR_INFOR } from "../type/MovieManagerType"
 
 export const tookInforTheather = () => {
     return async dispatch => {
@@ -19,15 +19,23 @@ export const tookInforTheather = () => {
 export const tookMovieCalender = (movieId) => {
 
     return async dispatch => {
+        dispatch({
+            type: OPEN_LOADING
+        })
         try {
             const result = await theaterManagerServices.infoMovieCalender(movieId)
             console.log('took movie')
-            dispatch({
+            await dispatch({
                 type: MOVIE_CALENDER_INFOR,
                 filmDetails: result.data.content
             })
+            dispatch({
+                type: CLOSE_LOADING
+            })
         } catch (error) {
-
+            dispatch({
+                type: CLOSE_LOADING
+            })
         }
     }
 }
