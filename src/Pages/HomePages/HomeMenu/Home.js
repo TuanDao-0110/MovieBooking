@@ -34,9 +34,9 @@ export default function Home(props) {
 
 
   return (
-
-    <Carousel dotPosition='bottom'  >
-      {movieList.slice(0, 5).map((item, index) => {
+<div className=''>
+   <Carousel dotPosition='bottom'  >
+      {movieList.slice(0, 10).map((item, index) => {
         return <div className='' key={index} >
           <div className='grid grid-cols-5' style={{ height: '100vh' }} >
 
@@ -73,5 +73,7 @@ export default function Home(props) {
 
 
     </Carousel >
+</div>
+   
   )
 }

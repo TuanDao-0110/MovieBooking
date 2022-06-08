@@ -4,7 +4,7 @@ import { Suspense, useEffect } from 'react'
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 import _ from 'lodash'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ACCOUNT } from "../../utilities/Setting/config";
 import style from './HomeTemplate.module.scss'
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
@@ -15,6 +15,8 @@ import { Popover, Button } from 'antd';
 import { CLOSE_LOADING, OPEN_LOADING } from "../../redux/type/MovieManagerType";
 import { history } from "../../App";
 import { userManagerBookingInfo } from "../../redux/action/UserManagerAction";
+
+import HeaderWeather from "./Layout/Header/HeaderWeather";
 
 export const HomeTemplate = (props) => {
     const { Component, ...restRoute } = props // props = path, exact vs Component
@@ -40,7 +42,6 @@ export const HomeTemplate = (props) => {
 
             dispath(userManagerBookingInfo())
         }
-
         window.scrollTo(0, 0)
         setTimeout(() => {
             dispath({
@@ -48,7 +49,6 @@ export const HomeTemplate = (props) => {
             })
         }, 1000);
     })
-
     const content = (
         <div>
 
@@ -83,6 +83,11 @@ export const HomeTemplate = (props) => {
         <Route {...restRoute} render={(propsRoute) => { // propsRoute = props.location, props.history,props.match ....  (propsRoute property is return from Route)
             return <>
                 <Suspense fallback='loading'>
+                    <div className='fixed  top-5 right-14 ' style={{ top: '' }}>
+                        
+                        <HeaderWeather></HeaderWeather>
+                        
+                        </div>
 
                     <section className={`${style['banner']}`} >
                         <Component {...propsRoute}></Component>
