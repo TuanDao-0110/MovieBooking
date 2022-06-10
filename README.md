@@ -31,5 +31,12 @@ Password : John@gmail.com
 5. Also edit you own information : 
 
 
+![loading](https://user-images.githubusercontent.com/75282610/173089237-d8ff5e61-2113-41e4-966a-2c54ce509ba7.gif)
+
+
+6. With Admin Account can edit and create movie's list: 
+![loading](https://user-images.githubusercontent.com/75282610/173089591-b2d41d70-232b-40c8-80c0-75795ba29a76.gif)
+![loading](https://user-images.githubusercontent.com/75282610/173089805-c59f57d0-b030-45e2-8382-c159e129dd8b.gif)
+
 
  
