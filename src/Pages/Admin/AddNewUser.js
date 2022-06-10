@@ -47,7 +47,7 @@ export default function AddNewUser() {
     },
     onSubmit: values => {
       const data = {
-        taiKhoan: values.email,
+        taiKhoan: values.account,
         matKhau: values.password,
         email: values.email,
         soDt: values.phone,

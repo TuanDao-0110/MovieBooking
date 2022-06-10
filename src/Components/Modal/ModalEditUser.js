@@ -6,7 +6,7 @@ export default function ModalEditUser(props) {
     const renderModalEdit = () => {
      
         return Object.entries(props.dataUser).forEach(e => {
-
+            console.log('e',e)
             render.push(<div className='grid grid-cols-3'>
                 <div className='col-span-1 uppercase text-red-500'>{e[0]} :</div>
                 <div className='col-span-2 text-right text-blue-500'>
