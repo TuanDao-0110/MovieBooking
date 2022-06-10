@@ -5,8 +5,7 @@ https://version-1-1.moviebooking.pages.dev/
 please Allow Insecure-content because I use http Domain
 
 ![image](https://user-images.githubusercontent.com/75282610/172365545-80867163-6784-44cf-a263-f0a63f8f4d74.png)
-
-
+![image](https://user-images.githubusercontent.com/75282610/173081188-5cc97736-8a75-4354-a932-1de7ac0009fb.png)
 Let start : 
 As normal Guest 
 
@@ -20,8 +19,8 @@ As normal Guest
 
 You can login as Admin to use Admin's feature : 
 
-UserName : kimcuong
-Password : kimcuong
+UserName : John@gmail.com 
+Password : John@gmail.com
 
 
 1. you can check your user, edit user from user's list, create movie calendar 
