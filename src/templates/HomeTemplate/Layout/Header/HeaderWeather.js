@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { WeatherIconSun, WeatherIconsCloud, WeatherIconSnow } from "../../../../Components/WeatherIcons/WeatherIcon";
+import { WeatherIconSun, WeatherIconsCloud, WeatherIconSnow, WeatherIconCloudAndSun, WeatherRain } from "../../../../Components/WeatherIcons/WeatherIcon";
 import { weatherInforAction } from "../../../../redux/action/WeatherAction";
 import _ from 'lodash'
 import moment from 'moment';
@@ -37,12 +37,12 @@ export default function HeaderWeather() {
     }, [])
 
     const renderWeather = () => {
-            setInterval(() => {
-                dispatch(weatherInforAction('helsinki'))
-            }, 60000)
+        setInterval(() => {
+            dispatch(weatherInforAction('helsinki'))
+        }, 60000)
         if (!_.isEmpty(weatherInfor)) {
             switch (weatherInfor?.weather?.[0]?.main) {
-                case 'clear sky': {
+                case 'clear sky' || 'clear': {
                     return <div className='flex  items-center   '>
                         <WeatherIconSun></WeatherIconSun>
                     </div>
@@ -52,8 +52,25 @@ export default function HeaderWeather() {
                         <WeatherIconsCloud></WeatherIconsCloud>
                     </div>
                 }
-                default: <WeatherIconsCloud></WeatherIconsCloud>
+                case 'snow': {
+                    return <div className='flex  items-center   '>
+                        <WeatherIconSnow></WeatherIconSnow>
+                    </div>
+                }
+                case 'cloud sun': {
+                    return <div className='flex  items-center   '>
+                        <WeatherIconCloudAndSun></WeatherIconCloudAndSun>
+                    </div>
+                }
+                case 'rain': {
+                    return <div className='flex  items-center   '>
+                        <WeatherRain></WeatherRain>
+                    </div>
+                }
+                default: <WeatherIconCloudAndSun></WeatherIconCloudAndSun>
             }
+        } else {
+            return <WeatherIconSun></WeatherIconSun>
         }
     }
     return (
@@ -63,7 +80,7 @@ export default function HeaderWeather() {
             </p>
             <p className='text-red-300 col-span-1 col-start-7'>Temp: {weatherInfor?.main?.temp.toFixed(1)}°C</p>
             <p className='text-red-300 col-span-1 text-right '>{weatherInfor?.weather?.[0].main}</p>
-            <div className='col-span-2 col-start-10 mt-2'>
+            <div className='col-span-1 col-start-9 mt-2'>
                 {renderWeather()}
             </div>
         </div>
