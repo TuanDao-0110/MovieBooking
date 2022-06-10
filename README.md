@@ -23,12 +23,12 @@ UserName : John@gmail.com
 Password : John@gmail.com
 
 
-1. you can check your user, edit user from user's list, create movie calendar 
+4. you can check your user, edit user from user's list, create movie calendar 
 
 
 
 ![loading](https://user-images.githubusercontent.com/75282610/172369213-cb61da53-d62f-44d3-9205-b66cedc42832.gif)
-2. Also edit you own information : 
+5. Also edit you own information : 
 
 
 
