@@ -42,8 +42,8 @@ export default function HeaderWeather() {
         }, 60000)
         if (!_.isEmpty(weatherInfor)) {
             switch (weatherInfor?.weather?.[0]?.main) {
-                case 'clear sky' || 'clear': {
-                    return <div className='flex  items-center   '>
+                case 'Clear' || 'clear sky': {
+                    return <div className='flex ml-10  items-center   '>
                         <WeatherIconSun></WeatherIconSun>
                     </div>
                 }
@@ -80,7 +80,7 @@ export default function HeaderWeather() {
             </p>
             <p className='text-red-300 col-span-1 col-start-7'>Temp: {weatherInfor?.main?.temp.toFixed(1)}°C</p>
             <p className='text-red-300 col-span-1 text-right '>{weatherInfor?.weather?.[0].main}</p>
-            <div className='col-span-1 col-start-9 mt-2'>
+            <div className='col-span-2 col-start-9 mt-2'>
                 {renderWeather()}
             </div>
         </div>
