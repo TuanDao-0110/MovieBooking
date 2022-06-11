@@ -37,7 +37,6 @@ export const postBookingTicketAction = (bookingModel) => {
             dispatch({
                 type: OPEN_LOADING
             })
-            console.log('booking Model', bookingModel.danhSachVe.length)
             if (bookingModel.danhSachVe.length > 0) {
 
                 const result = await bookingManagerService.postBookingDetailService(bookingModel)

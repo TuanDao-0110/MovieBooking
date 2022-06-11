@@ -41,47 +41,51 @@ export default function HeaderWeather() {
             dispatch(weatherInforAction('helsinki'))
         }, 60000)
         if (!_.isEmpty(weatherInfor)) {
-            switch (weatherInfor?.weather?.[0]?.main) {
-                case 'Clear' || 'clear sky': {
-                    return <div className='flex ml-10  items-center   '>
-                        <WeatherIconSun></WeatherIconSun>
-                    </div>
-                }
-                case 'Clouds': {
-                    return <div className='flex  items-center   '>
-                        <WeatherIconsCloud></WeatherIconsCloud>
-                    </div>
-                }
-                case 'snow': {
-                    return <div className='flex  items-center   '>
-                        <WeatherIconSnow></WeatherIconSnow>
-                    </div>
-                }
-                case 'cloud sun': {
-                    return <div className='flex  items-center   '>
-                        <WeatherIconCloudAndSun></WeatherIconCloudAndSun>
-                    </div>
-                }
-                case 'rain': {
-                    return <div className='flex  items-center   '>
-                        <WeatherRain></WeatherRain>
-                    </div>
-                }
-                default: <WeatherIconCloudAndSun></WeatherIconCloudAndSun>
-            }
+            // switch (weatherInfor?.weather?.[0]?.main) {
+            //     case 'Clear' || 'clear sky': {
+            //         return <div className='flex ml-10  items-center   '>
+            //             <WeatherIconSun></WeatherIconSun>
+            //         </div>
+            //     }
+            //     case 'Clouds': {
+            //         return <div className='flex  items-center  text-center w-5/6 m-auto '>
+            //             <WeatherIconsCloud></WeatherIconsCloud>
+            //         </div>
+            //     }
+            //     case 'snow': {
+            //         return <div className='flex  items-center   '>
+            //             <WeatherIconSnow></WeatherIconSnow>
+            //         </div>
+            //     }
+            //     case 'cloud sun': {
+            //         return <div className='flex  items-center   '>
+            //             <WeatherIconCloudAndSun></WeatherIconCloudAndSun>
+            //         </div>
+            //     }
+            //     case 'rain': {
+            //         return <div className='flex  items-center   '>
+            //             <WeatherRain></WeatherRain>
+            //         </div>
+            //     }
+            //     default: <WeatherIconCloudAndSun></WeatherIconCloudAndSun>
+            // }
+            return <img className='mb-5' alt='' src={`http://openweathermap.org/img/wn/${weatherInfor?.weather?.[0]?.icon}@2x.png`}>
+            </img>  
         } else {
-            return <WeatherIconSun></WeatherIconSun>
+            return <img alt='' className='scale-150' src={`http://openweathermap.org/img/wn/10d@2x.png`}>
+            </img>  
         }
     }
     return (
         <div className='grid grid-cols-12'>
-            <p className=' text-purple-200 col-start-7 col-span-4  shadow-cyan-400 shadow-sm-light text-center'>
+            <p className=' text-purple-200 col-start-9 col-span-3  shadow-cyan-400 shadow-sm-light text-center'>
                 <DateTime></DateTime>
             </p>
-            <p className='text-red-300 col-span-1 col-start-7'>Temp: {weatherInfor?.main?.temp.toFixed(1)}°C</p>
+            <p className='text-red-300 col-span-1 col-start-9'>Temp: {weatherInfor?.main?.temp.toFixed(1)} <span className='text-xl'>°C</span> </p>
             <p className='text-red-300 col-span-1 text-right '>{weatherInfor?.weather?.[0].main}</p>
-            <div className='col-span-2 col-start-9 mt-2'>
+            <div className='col-span-1 '>
                 {renderWeather()}
+                
             </div>
         </div>
     )
