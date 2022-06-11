@@ -1,6 +1,6 @@
 Visit at :
 
-https://version-1-1.moviebooking.pages.dev/ 
+https://moviebooking.pages.dev/ 
 
 please Allow Insecure-content because I use http Domain
 
