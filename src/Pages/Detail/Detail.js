@@ -41,8 +41,8 @@ export default function Detail(props) {
                                 <img src={hinhAnh} alt='' className='w-full h-full'></img>
                             </div>
                             <div className='grid place-content-center text-center px-5'>
-                                <h1 className='text-lg text-green-700'> {tenPhim}</h1>
-                                <p> {moTa.length > 50 ? moTa.slice(0, 50) + '...' : ''}</p>
+                                <h1 className='text-xl text-green-700 '> {tenPhim}</h1>
+                                <p className=''> {moTa.length > 50 ? moTa.slice(0, 50) + '...' : ''}</p>
                             </div>
                         </div>
                         <p></p>
@@ -53,6 +53,7 @@ export default function Detail(props) {
                                 <CircularProgressbar className='h-24' value={grade * 10} text={`${grade}/10`} styles={buildStyles({
                                     pathColor: "#6abf69",
                                     trailColor: "",
+                                    strokeLinecap:''
                                 })} />
                             </div>
                             <div>
@@ -76,21 +77,21 @@ export default function Detail(props) {
                             <TabPane tab={CALENDER} key="1" >
                                 <Tabs tabPosition={'left'} className='' style={{ color: '' }} >
                                     {heThongRapChieu.map((theater, index) => {
-                                        return <TabPane tab={<div className='flex flex-col items-center ['><img src={theater.logo} alt='' className='rounded-full w-10' />{theater.tenHeThongRap}</div>} key={index}>
+                                        return <TabPane tab={<div className='flex flex-col items-center text-center w-20 mr-3'><img src={theater.logo} alt='' className='rounded-full w-10 mb-3' />{theater.tenHeThongRap}</div>} key={index}>
                                             <div className=''>
                                                 {theater.cumRapChieu.map((theaterState, index) => {
                                                     return <div key={index}>
                                                         <div className='flex'>
                                                             <img src={theaterState.hinhAnh} alt='' className='w-10 h-10' />
-                                                            <h1 className='text-green-500 ml-5 '>
+                                                            <h1 className=' capitalize ml-5  text-lime-400/50'>
                                                                 Address :     {theaterState.tenCumRap}
                                                             </h1>
                                                         </div>
-                                                        <div className='grid lg:grid-cols-4 grid-cols-2 gap-1 text-center'>
+                                                        <div className='grid lg:grid-cols-4 grid-cols-2 gap-1 text-center mt-5'>
                                                             {theaterState.lichChieuPhim.map((time, index) => {
                                                                 return <div key={index} className='text-white flex flex-row '>
-                                                                    <p className='font-bold '>State : <span className='text-green-500'>{time.tenRap.slice(4)}</span>-*-</p>
-                                                                    <p className='font-bold'>Time : <NavLink to={`/checkout/${time.maLichChieu}`}> <span className='text-green-500'>{moment(time.ngayChieuGioChieu).format('LT')}</span></NavLink></p>
+                                                                    <p className='font-bold '>State : <span className='text-sky-500 '>{time.tenRap.slice(4)}</span>-*-</p>
+                                                                    <p className='font-bold'>Time : <NavLink to={`/checkout/${time.maLichChieu}`}> <span className='text-red-500 hover:text-rose-50 duration-75 '>{moment(time.ngayChieuGioChieu).format('LT')}</span></NavLink></p>
                                                                 </div>
                                                             })}
                                                         </div>

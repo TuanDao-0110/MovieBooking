@@ -1,14 +1,20 @@
 import { history } from "../../App"
 import { movieManagerService } from "../../Services/MovieManagerService"
-import { FILM_INFOR_ADMIN, GET_MOVIE_LIST } from "../type/MovieManagerType"
+import { CLOSE_LOADING, FILM_INFOR_ADMIN, GET_MOVIE_LIST, OPEN_LOADING } from "../type/MovieManagerType"
 
 export const takeFilmAction = () => {
     return async (dispatch) => {
+        dispatch({
+            type: OPEN_LOADING
+        })
         try {
             const result = await movieManagerService.getMovieList()
-            dispatch({
+            await dispatch({
                 type: GET_MOVIE_LIST,
                 movieList: result.data.content
+            })
+            await dispatch({
+                type: CLOSE_LOADING
             })
         } catch (error) {
 
@@ -20,11 +26,16 @@ export const takeFilmAction = () => {
 
 export const uploadFilmAction = (formData) => {
     return async dispatch => {
+        dispatch({
+            type : OPEN_LOADING
+        })
         try {
             const result = await movieManagerService.uploadPhim(formData)
             alert('Upload Success')
-            console.log(result)
             history.push('/admin/film')
+          dispatch({
+              type:CLOSE_LOADING
+          })
         } catch (error) {
             console.log(error.response.data)
         }
@@ -32,12 +43,18 @@ export const uploadFilmAction = (formData) => {
 }
 export const filmInforAdminAction = (filmId) => {
     return async dispatch => {
+        dispatch({
+            type: OPEN_LOADING
+        })
         try {
             const result = await movieManagerService.inforFilmForAdmin(filmId)
             console.log(result)
-            dispatch({
+            await dispatch({
                 type: FILM_INFOR_ADMIN,
                 filmDetailsForAdmin: result.data.content
+            })
+            dispatch({
+                type: CLOSE_LOADING
             })
         } catch (error) {
 
@@ -57,7 +74,7 @@ export const updateFilmAdmin = (filmModel) => {
             history.push('/admin/film')
         } catch (error) {
             console.log(error.response)
-            alert( error.response.data.content)
+            alert(error.response.data.content)
         }
     }
 }

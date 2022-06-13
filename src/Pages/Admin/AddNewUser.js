@@ -1,8 +1,9 @@
 import { useFormik } from 'formik';
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import ModalEditUser from '../../Components/Modal/ModalEditUser'
 import { addNewUserAction } from '../../redux/action/UserManagerAction';
+import { CLOSE_LOADING, OPEN_LOADING } from '../../redux/type/MovieManagerType';
 export default function AddNewUser() {
   // 1. data User to Server
   let dataUser = useRef({
@@ -46,7 +47,7 @@ export default function AddNewUser() {
     },
     onSubmit: values => {
       const data = {
-        taiKhoan: values.email,
+        taiKhoan: values.account,
         matKhau: values.password,
         email: values.email,
         soDt: values.phone,
@@ -63,6 +64,16 @@ export default function AddNewUser() {
       // dispatch(logUpUserAction(dataUser))
     },
   });
+  useEffect(() => {
+    dispatch({
+      type: OPEN_LOADING
+    })
+    setTimeout(() => {
+      dispatch({
+        type: CLOSE_LOADING
+      })
+    }, 2000);
+  }, [])
   return (
     <div className='text-black'>
       <ModalEditUser isModalVisible={isModalVisible} handleOk={handleOk} handleCancel={handleCancel} dataUser={dataUser.current}></ModalEditUser>

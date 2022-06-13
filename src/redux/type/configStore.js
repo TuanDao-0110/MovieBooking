@@ -6,13 +6,15 @@ import { MovieListReducer } from "../Reducer/MovieListReducer";
 import { TicketBookingReducer } from '../Reducer/TicketBookingManagerReducer'
 import { UserReducer } from "../Reducer/UserReducer";
 import LoadingReducer from "../Reducer/LoadingReducer";
+import WeatherReducer from "../Reducer/WeatherReducer";
 const rootReducer = combineReducers({
     CarouselReducer,
     MovieListReducer,
     TheatherManageReducer,
     TicketBookingReducer,
     UserReducer,
-    LoadingReducer
+    LoadingReducer,
+    WeatherReducer
 })
 
 

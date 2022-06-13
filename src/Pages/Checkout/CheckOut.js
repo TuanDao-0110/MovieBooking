@@ -3,7 +3,7 @@ import { ACCOUNT } from '../../utilities/Setting/config'
 import style from './CheckOut.module.css'
 import { useSelector, useDispatch, } from 'react-redux'
 import { bookingAction, postBookingTicketAction, removeBookingAction, takingBookingTicketAction } from '../../redux/action/BookingTicketAction'
-import { ACTIVE_CHANGE, BOOKING_SEAT_REDUCER, BOOKING_SEAT_REMOVE_REDUCER, OPEN_MODAL_BOOKING_DETAILS, ORDER_BOOKING_FROM_SERVER, REMOVE_ALL_TEMP_BOOKING, } from '../../redux/type/MovieManagerType'
+import { ACTIVE_CHANGE, BOOKING_SEAT_REDUCER, BOOKING_SEAT_REMOVE_REDUCER, OPEN_LOADING, OPEN_MODAL_BOOKING_DETAILS, ORDER_BOOKING_FROM_SERVER, REMOVE_ALL_TEMP_BOOKING, } from '../../redux/type/MovieManagerType'
 import _ from 'lodash'
 import moment from 'moment'
 import { Button, Tabs } from 'antd';
@@ -17,10 +17,12 @@ let newPhone = '';
 let newName = ''
 export function BookingConfirm() {
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(userManagerBookingInfo())
   }, [])
   const { bookingInforUser } = useSelector((state) => state.UserReducer)
+  console.log('bookingInforUser', bookingInforUser)
   return <>
     <div className="min-h-screen bg-gradient-to-tr from-red-300 to-yellow-200 flex justify-center items-center ">
       <div className="md:px-4 md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 space-y-4 md:space-y-0" >
@@ -42,7 +44,7 @@ export function BookingConfirm() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </span>
-                <p>{bookingInfor.thoiLuongPhim} Minutes</p>
+                <p className='text-black'>{bookingInfor.thoiLuongPhim} Minutes</p>
               </div>
               <div className="flex space-x-1 items-center">
                 <span>
@@ -50,7 +52,7 @@ export function BookingConfirm() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </span>
-                <p> {bookingInfor.danhSachGhe.length} Tickets Booked</p>
+                <p className='text-black'> <span className='text-red-500'> {bookingInfor.danhSachGhe.length}</span > Tickets Booked</p>
               </div>
               <div className="flex space-x-1 items-center">
                 <span>
@@ -58,7 +60,7 @@ export function BookingConfirm() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </span>
-                <p>{moment(bookingInfor.ngayDat).format("DD-MM-YY , HH:MM A")}</p>
+                <p className='text-black'>{moment(bookingInfor.ngayDat).format("DD-MM-YY , HH:MM A")}</p>
               </div>
 
               <div className="flex space-x-1 items-center">
@@ -69,7 +71,7 @@ export function BookingConfirm() {
                   </svg>
 
                 </span>
-                <p>{bookingInfor.danhSachGhe?.[0].tenHeThongRap}</p>
+                <p className='text-black'>{bookingInfor.danhSachGhe?.[0].tenHeThongRap}</p>
               </div>
 
               <button className="mt-4 text-xl w-full text-white bg-indigo-600 py-2 rounded-xl shadow-lg" onClick={() => {
@@ -150,10 +152,10 @@ function CheckOut(props) {
   const renderSeatBooking = () => {
     return _.sortBy(presentBookingSeatArr, ['stt'])?.map((seat, index) => {
       return <div key={index} className=' col-span-2 grid grid-cols-5 content-center cursor-pointer hover:shadow-md hover:bg-slate-100 duration-300 pt-2 '>
-        <div className=' text-green-500 col-span-1 text-left'>{seat.stt}</div>
+        <div className=' text-red-500 col-span-1 text-left'>{seat.stt}</div>
         <div className=' text-green-500 col-span-3 text-right'>{seat.giaVe?.toLocaleString()} Eur</div>
         <div className='col-span-1 text-right'>
-          <button className='text-red-500 hover:text-red-100' onClick={() => {
+          <button className='text-rose-500 hover:text-red-100' onClick={() => {
             dispatch(removeBookingAction(seat, bookingID))
           }}>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -207,7 +209,7 @@ function CheckOut(props) {
         <div className='col-span-3 '>
           <h3 className='text-center text-green-400 text-xl'> {presentBookingSeatArr?.reduce((sum, seat, index) => sum += seat.giaVe, 0).toLocaleString()} Eur</h3>
           <hr></hr>
-          <h3 className='text-xl'>{detailsTicketBooking.tenPhim} </h3>
+          <h3 className='text-xl text-red-100'>{detailsTicketBooking.tenPhim} </h3>
           <p>location: {detailsTicketBooking.diaChi}</p>
           <p> Date : {detailsTicketBooking.ngayChieu}</p>
           <p>Time :{detailsTicketBooking.gioChieu}</p>
@@ -219,27 +221,27 @@ function CheckOut(props) {
             </div>
             {renderSeatBooking()}
 
-            <div className='text-red-500 col-span-1'> Total : </div>
-            <div className='text-red-500 col-span-1 text-right'> {presentBookingSeatArr?.reduce((sum, seat, index) => sum += seat.giaVe, 0).toLocaleString()} eur </div>
+            <div className='text-rose-200 col-span-1'> Total : </div>
+            <div className='text-rose-200 col-span-1 text-right'> {presentBookingSeatArr?.reduce((sum, seat, index) => sum += seat.giaVe, 0).toLocaleString()} eur </div>
 
           </div>
           <hr></hr>
-          <div className='my-5'>
-            <i>Email</i>
+          <div className='my-5 '>
+            <i className='text-rose-500'>Email</i>
             <br>
             </br>
             {newEmail}
           </div>
           <hr></hr>
           <div className='my-5'>
-            <i>Phone</i>
+            <i className='text-rose-500'>Phone</i>
             <br>
             </br>
             {newPhone}
           </div>
           <hr></hr>
           <div className='my-5'>
-            <i>Name</i>
+            <i className='text-rose-500'>Name</i>
             <br>
             </br>
             {newName}
@@ -301,11 +303,11 @@ function CheckOut(props) {
 export default function (props) {
   const operaion =
     <>
-      <span>
+      <span className='text-red-500 text-2xl'>
         Hello ! <Button onClick={() => {
           props.history.push('/profile')
         }}>{newAccount} - Click to go Your Account's Profile</Button>
-        <Button className='ml-2' onClick={()=>{
+        <Button className='ml-2' onClick={() => {
           props.history.push('/')
         }}> Back Home Page</Button>
       </span>
@@ -320,7 +322,7 @@ export default function (props) {
   const { tabActive } = useSelector(state => state.TicketBookingReducer)
   return <div className=''>
 
-    <Tabs defaultActiveKey={1} activeKey={tabActive} onChange={(e) => onChange(e)} tabBarExtraContent={operaion}>
+    <Tabs defaultActiveKey={1} activeKey={tabActive} style={{ color: 'white' }} onChange={(e) => onChange(e)} tabBarExtraContent={operaion}>
       <TabPane tab=" 1. Choose Seat & PayMent" key="1" >
         <CheckOut {...props}></CheckOut>
       </TabPane>

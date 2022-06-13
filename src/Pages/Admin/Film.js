@@ -10,6 +10,8 @@ import { NavLink } from 'react-router-dom';
 import { Popconfirm, message } from 'antd';
 import DeleteFilmAsking from '../../Components/Modal/DeleteFilmAsking';
 import { FILM_INFOR } from '../../redux/type/utility';
+import { OPEN_LOADING } from '../../redux/type/MovieManagerType';
+import { DescriptionMovie } from '../../Pages/HomePages/HomeMenu/HomeDescription'
 const confirm = (e) => {
   console.log(e);
   message.success('Click on Yes');
@@ -28,15 +30,17 @@ export default function Film(props) {
   // call API to take movie list 
   const { arrFilmDefault } = useSelector(state => state.MovieListReducer)
   data = arrFilmDefault
-  console.log(data)
   const dispatch = useDispatch()
   useEffect(() => {
+    dispatch({
+      type: OPEN_LOADING
+    })
+
     dispatch(takeFilmAction())
   }, [])
 
 
 
-  console.log('arr', arrFilmDefault)
 
   // this for sorting function
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -152,7 +156,6 @@ export default function Film(props) {
   // <--- this for search
 
 
-
   //  Data
   const columns = [
     {
@@ -171,16 +174,11 @@ export default function Film(props) {
       title: 'Movie Name',
       dataIndex: 'tenPhim',
       key: 'tenPhim',
-      sorter: (a, b) => a.tenPhim.length - b.tenPhim.length
-      // if (a.tenPhim.length - b.tenPhim.length) {
-
-      //   return 1;
-      // } return -1
-
-      ,
+      render: (moTa) => { return "Lorem" },
+      sorter: (a, b) => a.tenPhim.length - b.tenPhim.length,
       sortOrder: sortedInfo.columnKey === 'tenPhim' ? sortedInfo.order : null,
       ellipsis: true,
-      ...getColumnSearchProps('tenPhim'),
+      // ...getColumnSearchProps('tenPhim'),
       width: 'auto',
     },
     {
@@ -198,7 +196,7 @@ export default function Film(props) {
       title: ' Discription',
       dataIndex: 'moTa',
       width: 150,
-      render: (moTa) => moTa.length > 50 ? moTa.slice(0, 50) : moTa,
+      render: (moTa) => DescriptionMovie.length > 50 ? DescriptionMovie.slice(0, 50) : DescriptionMovie,
       fixed: 'center',
 
     },

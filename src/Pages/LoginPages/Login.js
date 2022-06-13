@@ -2,7 +2,7 @@ import React, { useTransition } from 'react'
 import { useFormik } from 'formik';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { UserManagerAction } from '../../redux/action/UserManagerAction';
+import { UserManagerAction, userManagerBookingInfo } from '../../redux/action/UserManagerAction';
 export default function Login(props) {
 
   const dispatch = useDispatch()
@@ -17,7 +17,6 @@ export default function Login(props) {
         matKhau: values.password
       }
       dispatch(UserManagerAction(dataUser))
-
     },
   });
 
@@ -35,7 +34,7 @@ export default function Login(props) {
       <div className="mt-8">
         <form>
           <div>
-            <label htmlFor="email" className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
+            <label htmlFor="email" className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Account</label>
             <input type="text" name="email" id="email" placeholder="example@example.com" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" onChange={formik.handleChange}
               value={formik.values.email} />
           </div>

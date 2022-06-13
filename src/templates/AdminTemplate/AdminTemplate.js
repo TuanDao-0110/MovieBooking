@@ -1,12 +1,12 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { Route } from 'react-router-dom'
-import { Avatar, Layout, Menu, Select } from 'antd';
+import { Avatar, Layout, Menu, } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     UserOutlined,
     VideoCameraOutlined,
-    UploadOutlined,
+    
 } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import SubMenu from 'antd/lib/menu/SubMenu';
@@ -15,8 +15,7 @@ import { history } from '../../App';
 import { useTranslation } from 'react-i18next';
 
 import _ from 'lodash'
-import { Option } from 'antd/lib/mentions';
-import { ADMIN } from '../../redux/type/utility'
+
 const { Header, Sider, Content } = Layout;
 
 export default function AdminTemplate(props) {
@@ -36,22 +35,20 @@ export default function AdminTemplate(props) {
     }
     const { Component, ...restRoute } = props // props = path, exact vs Component
     useEffect(() => {
+        
         window.scrollTo(0, 0)
     })
     return (
         < >
             <Route {...restRoute} render={(propsRoute) => { // propsRoute = props.location, props.history,props.match ....  (propsRoute property is return from Route)
                 return <div className=''>
-                    <Layout style={{ height: '100%' }} className='h-screen'>
+                    <Layout style={{ height: '100vh' }} className='h-screen'>
                         <Sider trigger={null} collapsible collapsed={collapsed}>
                             <div className="logo" />
-
                             <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}   >
                                 <SubMenu key='1' title='User'>
-
                                     <Menu.Item key='2' icon={<UserOutlined></UserOutlined>}> <NavLink to={'/admin/users'}>User List</NavLink></Menu.Item>
                                     <Menu.Item key='3' icon={<UserOutlined></UserOutlined>}> <NavLink to={'/admin/addnewuser'}>Add New User</NavLink></Menu.Item>
-
                                 </SubMenu>
                                 <SubMenu key='4' icon={<></>} title="Films">
                                     <Menu.Item key='5' icon={<VideoCameraOutlined></VideoCameraOutlined>}>
@@ -61,11 +58,7 @@ export default function AdminTemplate(props) {
                                         <NavLink to={'/admin/film/addnew'}>AddNew</NavLink>
                                     </Menu.Item>
                                 </SubMenu>
-
-                                {/* <Menu.Item key='7' icon={<UserOutlined></UserOutlined>}> <NavLink to={'/admin/showtimes'}>ShowTime</NavLink></Menu.Item> */}
-
                             </Menu>
-
                         </Sider>
                         <Layout className="">
                             <Header className="" style={{ padding: 0, backgroundColor: '' }}>
