@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom'
 import { Avatar, Layout, Menu, } from 'antd';
 import {
@@ -6,7 +6,7 @@ import {
     MenuFoldOutlined,
     UserOutlined,
     VideoCameraOutlined,
-    
+
 } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import SubMenu from 'antd/lib/menu/SubMenu';
@@ -35,15 +35,15 @@ export default function AdminTemplate(props) {
     }
     const { Component, ...restRoute } = props // props = path, exact vs Component
     useEffect(() => {
-        
+
         window.scrollTo(0, 0)
     })
     return (
         < >
             <Route {...restRoute} render={(propsRoute) => { // propsRoute = props.location, props.history,props.match ....  (propsRoute property is return from Route)
                 return <div className=''>
-                    <Layout style={{ height: '100vh' }} className='h-screen'>
-                        <Sider trigger={null} collapsible collapsed={collapsed}>
+                    <Layout style={{ height: '200vh' }} >
+                        <Sider trigger={null} collapsible  style={{ height: '200vh' }} collapsed={collapsed}>
                             <div className="logo" />
                             <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}   >
                                 <SubMenu key='1' title='User'>
