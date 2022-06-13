@@ -16,8 +16,8 @@ export default function Users() {
   const getListUser = () => {
     dispatch({ type: OPEN_LOADING })
     takeUserListAction().then(e => setUserList(e.data.content))
-      setTimeout(() => {
-        dispatch({ type: CLOSE_LOADING })
+    setTimeout(() => {
+      dispatch({ type: CLOSE_LOADING })
     }, 2000);
   }
   // findUser Function 
@@ -90,6 +90,7 @@ export default function Users() {
       title: "Account type ",
       dataIndex: 'maLoaiNguoiDung',
       key: 'maLoaiNguoiDung',
+      render: (item) => {return item.slice(0,1) === "Q" ? "Amin" :"Customer"  },
       sorter: (a) => a.maLoaiNguoiDung !== 'KhachHang',
       sortOrder: sortedInfo.columnKey === 'maLoaiNguoiDung' ? sortedInfo.order : null,
       ellipsis: true,

@@ -9,6 +9,7 @@ import { history } from '../../../App';
 import style from './Home.module.css'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import { tookMovieCalender } from '../../../redux/action/TheatherManagerAction';
+import { DescriptionMovie } from './HomeDescription';
 export default function Home(props) {
   const { movieList } = useSelector(state => state.MovieListReducer)
   const { theatherList } = useSelector(state => state.TheatherManageReducer)
@@ -47,8 +48,8 @@ export default function Home(props) {
                 </div>
                 <div className={style["details"]}>
                   <div className={style["center"]}>
-                    <h1>Movie Name :<br /><span>{item.tenPhim}</span></h1>
-                    <p>{item.moTa.slice(0, `${readMore ? 40 : 4000}`)}</p>
+                    <h1>Movie Name:<br /><span>LOREM</span></h1>
+                    <p>{DescriptionMovie.slice(0, `${readMore ? 40 : 4000}`)}</p>
                     <i onClick={() => {
                       setReadMore(!readMore)
                     }} className='hover:text-red-400 duration-75 cursor-pointer'>{readMore ? '...[+]' : "[-]"}</i>
@@ -57,7 +58,7 @@ export default function Home(props) {
                         history.push(`/detail/${item.maPhim}`)
                         dispatch(tookMovieCalender(item.maPhim))
                       }}>
-                        <button className='w-30 hover:text-red-400 duration-75' >Booking This</button></li>
+                        <button className='w-30 hover:text-red-400 duration-75' >Book This Movie</button></li>
                     </ul>
                   </div>
                 </div>

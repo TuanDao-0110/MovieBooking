@@ -1,0 +1,1 @@
+export  const DescriptionMovie = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora at beatae perspiciatis a possimus architecto excepturi? Cupiditate, architecto doloribus eius dolore ipsam dicta maxime ad nihil nisi deserunt et odit.'
