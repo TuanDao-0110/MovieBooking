@@ -29,7 +29,7 @@ export function BookingConfirm() {
 
         {bookingInforUser?.map((bookingInfor, index) => {
           return <div key={index} className="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
-            <h3 className="mb-3 text-xl font-bold text-indigo-600">{bookingInfor.tenPhim}</h3>
+            <h3 className="mb-3 text-xl font-bold text-indigo-600">Lorem</h3>
             <div className="relative">
               <img className="w-20 m-auto h-36 rounded-xl" src={bookingInfor.hinhAnh} alt="Colors" onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
@@ -209,8 +209,8 @@ function CheckOut(props) {
         <div className='col-span-3 '>
           <h3 className='text-center text-green-400 text-xl'> {presentBookingSeatArr?.reduce((sum, seat, index) => sum += seat.giaVe, 0).toLocaleString()} Eur</h3>
           <hr></hr>
-          <h3 className='text-xl text-red-100'>{detailsTicketBooking.tenPhim} </h3>
-          <p>location: {detailsTicketBooking.diaChi}</p>
+          <h3 className='text-xl text-red-100'>Movie: Lorem </h3>
+          <p> <span className='text-rose-400 uppercase'>location:</span> Flamingo Entertainment Centre</p>
           <p> Date : {detailsTicketBooking.ngayChieu}</p>
           <p>Time :{detailsTicketBooking.gioChieu}</p>
           <hr></hr>

@@ -1,5 +1,5 @@
 export const CALENDER = 'CALENDER'
-export const INFOR = 'INFOR'
+export const INFOR = 'INFO'
 export const RATING = 'RATING'
 
 export const TRAILER = 'TRAILER'

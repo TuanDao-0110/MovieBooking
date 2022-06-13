@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { CALENDER, INFOR, RATING, TRAILER } from '../../redux/type/utility';
 import { Hidden } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { DescriptionMovie } from '../HomePages/HomeMenu/HomeDescription';
 const { TabPane } = Tabs;
 
 export default function Detail(props) {
@@ -41,8 +42,8 @@ export default function Detail(props) {
                                 <img src={hinhAnh} alt='' className='w-full h-full'></img>
                             </div>
                             <div className='grid place-content-center text-center px-5'>
-                                <h1 className='text-xl text-green-700 '> {tenPhim}</h1>
-                                <p className=''> {moTa.length > 50 ? moTa.slice(0, 50) + '...' : ''}</p>
+                                <h1 className='text-xl text-green-700 '> Lorem</h1>
+                                <p className=''> {DescriptionMovie.length > 50 ? DescriptionMovie.slice(0, 50) + '...' : ''}</p>
                             </div>
                         </div>
                         <p></p>
@@ -53,7 +54,7 @@ export default function Detail(props) {
                                 <CircularProgressbar className='h-24' value={grade * 10} text={`${grade}/10`} styles={buildStyles({
                                     pathColor: "#6abf69",
                                     trailColor: "",
-                                    strokeLinecap:''
+                                    strokeLinecap: ''
                                 })} />
                             </div>
                             <div>
@@ -105,7 +106,7 @@ export default function Detail(props) {
                                 </Tabs>
                             </TabPane>
                             <TabPane tab={INFOR} key="2">
-                                {moTa}
+                                {DescriptionMovie}
                             </TabPane>
                             <TabPane tab={RATING} key="3">
                                 <HalfRating rating={grade}></HalfRating>
