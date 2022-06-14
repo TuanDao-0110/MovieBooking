@@ -44,7 +44,7 @@ export default function HeaderWeather() {
             return <img className='' alt='' src={`http://openweathermap.org/img/wn/${weatherInfor?.weather?.[0]?.icon}@2x.png`} >
             </img>
         } else {
-            return <img alt='' className='scale-50' src={`http://openweathermap.org/img/wn/10d@2x.png`}>
+            return <img alt='' className='absolute ' style={{top:'-25px'}} src={`http://openweathermap.org/img/wn/10d@2x.png`}>
             </img>
         }
     }
@@ -53,14 +53,17 @@ export default function HeaderWeather() {
             {window.addEventListener('scroll', () => {
                 setSrollY(window.scrollY)
             })}
-            {scrollY > 100 ? <></> : <div className='grid grid-cols-12 '>
-                <p className=' text-purple-200 col-start-9 col-span-3  shadow-cyan-400 shadow-sm-light text-center'>
+            {scrollY > 100 ? <></> : <div className='grid grid-cols-12 place-items-stretch  '>
+                <p className=' text-purple-200 col-start-8 col-span-4  shadow-cyan-400 shadow-sm-light text-center'>
                     <DateTime></DateTime>
                 </p>
-                <p className='text-red-300 col-span-1 col-start-9 text-center '>Temp: {weatherInfor?.main?.temp.toFixed(1)} <span className=''>°C</span> </p>
+                <p className='text-red-300 col-span-1 col-start-8 flex items-stretch'>Temp°C {weatherInfor?.main?.temp.toFixed(1)}  </p>
                 <p className='text-red-300 col-span-1 text-center '>{weatherInfor?.weather?.[0].main}</p>
-                <div className='col-span-1  '>
+                <div className='col-span-2  '>
+                    <div className='relative'>
                     {renderWeather()}
+
+                    </div>
 
                 </div>
             </div>}
