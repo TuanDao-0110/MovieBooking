@@ -3,7 +3,7 @@ import { Header } from "./Layout/Header/Header"
 import { Suspense, useEffect } from 'react'
 import React from 'react'
 import { useTranslation } from 'react-i18next';
-import _ from 'lodash'
+import _, { set } from 'lodash'
 import { useDispatch, useSelector } from 'react-redux'
 import { ACCOUNT } from "../../utilities/Setting/config";
 import style from './HomeTemplate.module.scss'
@@ -17,6 +17,7 @@ import { history } from "../../App";
 import { userManagerBookingInfo } from "../../redux/action/UserManagerAction";
 
 import HeaderWeather from "./Layout/Header/HeaderWeather";
+import { useState } from "react";
 
 export const HomeTemplate = (props) => {
     const { Component, ...restRoute } = props // props = path, exact vs Component
@@ -32,7 +33,7 @@ export const HomeTemplate = (props) => {
         newemail = email
         userType = maLoaiNguoiDung
     }
-
+    const [scrollY, setScrollY] = useState()
     const dispath = useDispatch()
     useEffect(() => {
         // dispath({
@@ -48,7 +49,9 @@ export const HomeTemplate = (props) => {
                 type: CLOSE_LOADING
             })
         }, 1000);
-    })
+
+
+    }, [])
     const content = (
         <div>
 
@@ -79,14 +82,16 @@ export const HomeTemplate = (props) => {
                 }}>Sign In</p>}
         </div>
     );
+
+
+
+
     return (
         <Route {...restRoute} render={(propsRoute) => { // propsRoute = props.location, props.history,props.match ....  (propsRoute property is return from Route)
             return <>
                 <Suspense fallback='loading'>
-                    <div className={`pt-1  right-1 ${window.scrollBy(0, 10) ? 'sticky' : 'fixed'}`} style={{ top: '' }}>
-
+                    <div className={`pt-1  right-1 fixed`} style={{ top: '' }} >
                         <HeaderWeather></HeaderWeather>
-
                     </div>
 
                     <section className={`${style['banner']}`} >

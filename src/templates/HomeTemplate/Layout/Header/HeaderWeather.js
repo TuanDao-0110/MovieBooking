@@ -8,7 +8,6 @@ import { getTimeProps } from 'antd/lib/date-picker/generatePicker';
 
 
 
-
 function DateTime() {
     let [date, setDate] = useState(1)
     useEffect(() => {
@@ -28,19 +27,18 @@ function DateTime() {
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function HeaderWeather() {
+    const [scrollY, setSrollY] = useState()
     const dispatch = useDispatch()
     const { weatherInfor } = useSelector(state => state.WeatherReducer)
-    console.log('weatherInfor', weatherInfor)
-
     useEffect(() => {
         dispatch(weatherInforAction('helsinki'))
         setTimeout(() => {
             dispatch(weatherInforAction('helsinki'))
-        }, 6000)
+        }, 60000)
     }, [])
 
     const renderWeather = () => {
-      
+
         if (!_.isEmpty(weatherInfor)) {
 
             return <img className='' alt='' src={`http://openweathermap.org/img/wn/${weatherInfor?.weather?.[0]?.icon}@2x.png`} >
@@ -51,16 +49,24 @@ export default function HeaderWeather() {
         }
     }
     return (
-        <div className='grid grid-cols-12 '>
-            <p className=' text-purple-200 col-start-9 col-span-3  shadow-cyan-400 shadow-sm-light text-center'>
-                <DateTime></DateTime>
-            </p>
-            <p className='text-red-300 col-span-1 col-start-9 text-center '>Temp: {weatherInfor?.main?.temp.toFixed(1)} <span className=''>°C</span> </p>
-            <p className='text-red-300 col-span-1 text-center '>{weatherInfor?.weather?.[0].main}</p>
-            <div className='col-span-1  '>
-                {renderWeather()}
+        <>
+            {window.addEventListener('scroll', () => {
+                setSrollY(window.scrollY)
+            })}
+            {scrollY > 100 ? <></> : <div className='grid grid-cols-12 '>
+                <p className=' text-purple-200 col-start-9 col-span-3  shadow-cyan-400 shadow-sm-light text-center'>
+                    <DateTime></DateTime>
+                </p>
+                <p className='text-red-300 col-span-1 col-start-9 text-center '>Temp: {weatherInfor?.main?.temp.toFixed(1)} <span className=''>°C</span> </p>
+                <p className='text-red-300 col-span-1 text-center '>{weatherInfor?.weather?.[0].main}</p>
+                <div className='col-span-1  '>
+                    {renderWeather()}
 
-            </div>
-        </div>
+                </div>
+            </div>}
+
+        </>
+
+
     )
 }
