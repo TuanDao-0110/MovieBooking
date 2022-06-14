@@ -83,11 +83,11 @@ export const HomeTemplate = (props) => {
         <Route {...restRoute} render={(propsRoute) => { // propsRoute = props.location, props.history,props.match ....  (propsRoute property is return from Route)
             return <>
                 <Suspense fallback='loading'>
-                    <div className='fixed  top-5 right-14 ' style={{ top: '' }}>
-                        
+                    <div className={`pt-1  right-1 ${window.scrollBy(0, 10) ? 'sticky' : 'fixed'}`} style={{ top: '' }}>
+
                         <HeaderWeather></HeaderWeather>
-                        
-                        </div>
+
+                    </div>
 
                     <section className={`${style['banner']}`} >
                         <Component {...propsRoute}></Component>
