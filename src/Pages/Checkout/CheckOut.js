@@ -9,6 +9,7 @@ import moment from 'moment'
 import { Button, Tabs } from 'antd';
 import { userManagerBookingInfo } from '../../redux/action/UserManagerAction'
 import { connection } from '../../index'
+import Checkout3D from './Checkout3D/Checkout3D'
 
 const { TabPane } = Tabs;
 let newAccount = '';
@@ -324,7 +325,8 @@ export default function (props) {
 
     <Tabs defaultActiveKey={1} activeKey={tabActive} style={{ color: 'white' }} onChange={(e) => onChange(e)} tabBarExtraContent={operaion}>
       <TabPane tab=" 1. Choose Seat & PayMent" key="1" >
-        <CheckOut {...props}></CheckOut>
+        {/* <CheckOut {...props}></CheckOut> */}
+        <Checkout3D></Checkout3D>
       </TabPane>
       <TabPane tab="2. Booking Confirmed" key="2" >
         <BookingConfirm {...props}></BookingConfirm>
